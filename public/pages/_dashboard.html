@@ -1,0 +1,86 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+  <!-- main -->
+  <div class="col">
+    <!-- main header -->
+    <div class="bg-light lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h1 class="m-n font-thin h3 text-black">任务板</h1>
+
+        </div>
+      </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md" ng-controller="FlotChartDemoCtrl">
+      <!-- stats -->
+        <div class="row">
+            <div class="col-lg-3 cus-col">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        计划任务
+                    </div>
+                    <div ui-jq="nestable" class="dd" id="mission-1">
+
+
+                            <li class="dd-item" data-id="1">
+                                <div class="dd-handle cus-dd-handle">Item 1</div>
+                            </li>
+                            <li class="dd-item" data-id="1">
+                                <div class="cus-dd-handle dd-handle">Item 1</div>
+                            </li>
+                            <li class="dd-item" data-id="1">
+                                <div class="dd-handle">Item 1</div>
+                            </li>
+                            <li class="dd-item" data-id="1">
+                                <div class="dd-handle">Item 1</div>
+                            </li>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 cus-col">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        当前任务
+                    </div>
+                    <div ui-jq="nestable" class="dd" id="mission-2">
+
+
+                            <div class="dd-empty"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 cus-col">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        待审核
+                    </div>
+                    <div ui-jq="nestable" class="dd" id="mission-3">
+                        <div class="dd-empty"></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 cus-col">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        已完成
+                    </div>
+                    <div ui-jq="nestable" class="dd" id="mission-4">
+                        <div class="dd-empty"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+  </div>
+  <!-- / main -->
+  <!-- right col -->
+
+  <!-- / right col -->
+</div>

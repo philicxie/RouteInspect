@@ -1,0 +1,30 @@
+.cus-dd-item {
+    border-radius: 5px;
+}
+
+.cus-dd-handle {
+    border-radius: 10px !important;
+    -webkit-border-radius: 10px !important;
+}
+
+.cus-col {
+    padding-left:  5px !important;
+    padding-right: 5px !important;
+}
+
+.cus-hidden {
+    max-height: 0 !important;
+    visibility: hidden !important;
+}
+
+.cus-list-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    border: 1px solid;
+    border-width: 1px 0;
+    border-radius: 0;
+    border-color: #DDDDDD;
+    padding-right: 15px;
+}
