@@ -10,15 +10,18 @@
     <div class="wrapper-md">
         <div class="row">
             <div class="col-lg-8" ng-controller="AccordionDemoCtrl">
-                    <accordion close-others="oneAtATime">
-                    <accordion-group heading="Accordion Header, initially expanded" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+                <accordion close-others="oneAtATime">
+                    <accordion-group heading="目标设备" is-open="true">
                     <p>
                         <button class="btn btn-default btn-sm" ng-click="status.open = !status.open">Toggle last panel</button>
                         <button class="btn btn-default btn-sm" ng-click="status.isFirstDisabled = ! status.isFirstDisabled">Enable / Disable first panel</button>
                     </p>
                     </accordion-group>
                     </accordion>
-                    <div class="form-group" id="allmap" ng-controller="BMapCtrl" style="width: 100%;height: 500px;"></div>
+                <div class="form-group" id="allmap" ng-controller="BMapCtrl" style="width: 100%;height: 500px;"></div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">任务描述</div>
+                </div>
             </div>
             <div class="col-lg-4">
                 <div class="panel panel-info">

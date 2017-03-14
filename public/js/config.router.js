@@ -66,6 +66,10 @@ angular.module('app')
                       ]
                   }
               })
+              .state('app._authority', {
+                  url: '_authority',
+                  templateUrl: 'pages/_authority.html'
+              })
               .state('app.ui', {
                   url: '/ui',
                   template: '<div ui-view class="fade-in-up"></div>'
