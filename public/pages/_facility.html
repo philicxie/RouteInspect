@@ -24,9 +24,8 @@
                     </div>
                 </div>
             </div>
-            <div class="wrapper b-t">
-                <span tooltip="Double click to Edit" class="pull-right text-muted inline wrapper-xs m-r-sm"><i class="fa fa-question"></i></span>
-                <a href class="btn btn-sm btn-default" ng-click="createGroup()"><i class="fa fa-plus fa-fw m-r-xs"></i> New Group</a>
+            <div class="wrapper b-t text-center">
+                <a href class="btn btn-sm btn-default btn-addon" ng-click="createGroup()"><i class="fa fa-plus fa-fw m-r-xs"></i> 新增分组</a>
             </div>
         </div>
     </div>
@@ -53,12 +52,12 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="(items | filter:{group:filter} | filter:query).length">No Contacts</div>
+                        <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="(items | filter:{group:filter} | filter:query).length">无符合条件结果</div>
                     </div>
                 </div>
             </div>
             <div class="wrapper b-t text-center">
-                <a href class="btn btn-sm btn-default btn-addon" ng-click="createItem()"><i class="fa fa-plus fa-fw m-r-xs"></i> New Contact</a>
+                <a href class="btn btn-sm btn-default btn-addon" ng-click="createItem()"><i class="fa fa-plus fa-fw m-r-xs"></i> 新增设备</a>
             </div>
         </div>
     </div>

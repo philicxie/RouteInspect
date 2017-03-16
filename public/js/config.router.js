@@ -72,7 +72,7 @@ angular.module('app')
               })
               .state('app._facility', {
                   url: '_facility',
-                  templateUrl: 'tpl/apps_contact.html',
+                  templateUrl: 'pages/_facility.html',
                   resolve: {
                       deps: ['uiLoad',
                           function( uiLoad ){
