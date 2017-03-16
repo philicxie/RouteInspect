@@ -8,7 +8,7 @@ app.controller('SigninFormController', ['$scope', '$http', '$state', function($s
     $scope.authError = null;
 
     $scope.login = function() {
-        $state.go('app._dashboard');
+        $state.go('app.dashboard-v1');
         $scope.authError = null;
       // Try to login
         $http.post('api/login', {email: $scope.user.email, password: $scope.user.password})

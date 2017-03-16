@@ -22,7 +22,7 @@ angular.module('app')
               .state('app', {
                   abstract: true,
                   url: '/_app',
-                  templateUrl: 'pages/_app.html'
+                  templateUrl: 'tpl/layout.html'
               })
               .state('app._dashboard', {
                   url:'/_dashboard',
@@ -69,6 +69,16 @@ angular.module('app')
               .state('app._authority', {
                   url: '_authority',
                   templateUrl: 'pages/_authority.html'
+              })
+              .state('app._facility', {
+                  url: '_facility',
+                  templateUrl: 'tpl/apps_contact.html',
+                  resolve: {
+                      deps: ['uiLoad',
+                          function( uiLoad ){
+                              return uiLoad.load( ['js/app/contact/contact.js']);
+                          }]
+                  }
               })
               .state('app.ui', {
                   url: '/ui',
