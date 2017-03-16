@@ -11,6 +11,8 @@ var users = require('./routes/users');
 var mongoose = require('mongoose');
 var mongodb = require('mongodb').MongoClient;
 
+var User = require('./routes/db').user;
+
 var app = express();
 
 // view engine setup
@@ -30,13 +32,34 @@ app.use('/users', users);
 
 //main----------------------------
 //var db = mongoose.connect('mongodb://localhost/RouteInspect');
-var address = 'mongodb://localhost:27017/RouteInspect';
-mongodb.connect(address, function(err, db) {
-    if(err) {
-        console.log(err);
-    } else {
-        console.log('mongodb connection success');
-    }
+// var address = 'mongodb://localhost:27017/RouteInspect';
+// mongodb.connect(address, function(err, db) {
+//     if(err) {
+//         console.log(err);
+//     } else {
+//         console.log('mongodb connection success');
+//         var collection = db.collection('Users');
+//         var whereStr = {name: 'xlw'};
+//         collection.find(whereStr).toArray(function(err, result){
+//             if(err) {
+//                 console.log(err);
+//                 return;
+//             }
+//             console.log(result);
+//             db.close();
+//
+//         });
+//     }
+// });
+
+// var temUser = new User({name: 'Phil', password:'432432'});
+// temUser.save(function(err, doc){
+//     if(err) return console.error(err);
+//     console.log(doc);
+// });
+User.find(function(err, doc){
+    if(err) return console.error(err);
+    console.log(doc);
 });
 //!main---------------------------
 
