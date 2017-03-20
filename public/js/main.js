@@ -74,8 +74,6 @@ angular.module('app')
       // }), function(){
       //   console.log('not ok');
       // }
-
-      console.log($cookieStore.get('name'));
       if($cookieStore.get('name')!==undefined) {
         console.log('get');
       } else {

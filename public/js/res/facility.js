@@ -91,7 +91,16 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $h
 }]);
 
 app.controller('BMapCtrl', ['$scope', function($scope){
+    var mapHeight = Math.round(window.innerHeight*0.5)+'px';
+    var mapWidth  = Math.round(window.innerHeight*0.5*1.5)+'px';
+    $scope.mapStyle = {
+        width:  mapWidth,
+        height: mapHeight,
+        margin: '0 auto'
+    };
     var map = new BMap.Map("allmap");
     var point = new BMap.Point(116.404, 39.915); //中心点和经纬度
     map.centerAndZoom(point, 15);//数字越小，显示范围越大
+    //console.log(window.innerHeight);
+    console.log(mapHeight);
 }]);
