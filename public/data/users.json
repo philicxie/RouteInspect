@@ -1,0 +1,12 @@
+{
+  "aaData":[
+    {
+      "account": "pex@sjtu.edu.cn",
+      "name": "Philic",
+      "password": "mypastword",
+      "au_admin": "<i class='fa fa-check'></i>",
+      "au_manager": "true",
+      "au_clerk": "true"
+    }
+  ]
+}
