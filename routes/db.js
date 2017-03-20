@@ -9,4 +9,9 @@ var userSchema = mongoose.Schema({
     password: String
 });
 
+var facilitySchema = mongoose.Schema({
+    name: String,
+
+})
+
 module.exports.user = mongoose.model('Users', userSchema);

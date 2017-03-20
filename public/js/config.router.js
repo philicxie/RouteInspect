@@ -56,7 +56,7 @@ angular.module('app')
                   }
               })
               .state('app._mission', {
-                  url: '_mission',
+                  url: '/_mission',
                   templateUrl: 'pages/_mission.html',
                   resolve: {
                       deps: ['$ocLazyLoad',
@@ -67,16 +67,16 @@ angular.module('app')
                   }
               })
               .state('app._authority', {
-                  url: '_authority',
+                  url: '/_authority',
                   templateUrl: 'pages/_authority.html'
               })
               .state('app._facility', {
-                  url: '_facility',
+                  url: '/_facility',
                   templateUrl: 'pages/_facility.html',
                   resolve: {
                       deps: ['uiLoad',
                           function( uiLoad ){
-                              return uiLoad.load( ['js/app/contact/contact.js']);
+                              return uiLoad.load( ['js/res/facility.js']);
                           }]
                   }
               })

@@ -31,7 +31,7 @@
     </div>
     <!-- /column -->
     <!-- column -->
-    <div class="col w-lg lter b-r">
+    <div class="col w-md lter b-r">
         <div class="vbox">
             <div class="wrapper-xs b-b">
                 <div class="input-group m-b-xxs">
@@ -66,7 +66,7 @@
     <!-- column -->
     <div class="col bg-white-only">
         <div class="vbox">
-            <div class="wrapper-sm b-b">
+            <div class="wrapper b-b">
                 <div class="m-t-n-xxs m-b-n-xxs m-l-xs">
                     <a class="btn btn-xs btn-default pull-right" ng-hide="!item" ng-click="deleteItem(item)"><i class="fa fa-times"></i></a>
                     <a class="btn btn-xs btn-default" ng-hide="item.editing" ng-click="editItem(item)">Edit</a>
@@ -74,64 +74,8 @@
                 </div>
             </div>
             <div class="row-row">
-                <div class="cell">
-                    <div class="cell-inner">
-                        <div class="wrapper-lg">
-                            <div class="hbox h-auto m-b-lg">
-                                <div class="col text-center w-sm">
-                                    <div class="thumb-lg avatar inline">
-                                        <img ng-src="{{item.avatar}}" ng-show="item.avatar">
-                                    </div>
-                                </div>
-                                <div class="col v-middle h1 font-thin">
-                                    <div ng-hide="item.editing">{{item.first}} {{item.last}}</div>
-                                    <div ng-show="item.editing">
-                                        <input type="text" placeholder="First" class="form-control w-auto input-lg m-b-n-xxs font-bold" ng-model="item.first" >
-                                        <input type="text" placeholder="Last" class="form-control w-auto input-lg font-bold" ng-model="item.last" >
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- fields -->
-                            <div class="form-horizontal">
-                                <div class="form-group m-b-sm" ng-hide="!item.mobile && !item.editing">
-                                    <label class="col-sm-3 control-label">Mobile</label>
-                                    <div class="col-sm-9">
-                                        <p class="form-control-static" ng-hide="item.editing">{{item.mobile}}</p>
-                                        <input type="text" class="form-control" ng-show="item.editing" ng-model="item.mobile" >
-                                    </div>
-                                </div>
-                                <div class="form-group m-b-sm" ng-hide="!item.home && !item.editing">
-                                    <label class="col-sm-3 control-label">Home</label>
-                                    <div class="col-sm-9">
-                                        <p class="form-control-static" ng-hide="item.editing">{{item.home}}</p>
-                                        <input type="text" class="form-control" ng-show="item.editing" ng-model="item.home" >
-                                    </div>
-                                </div>
-                                <div class="form-group m-b-sm" ng-hide="!item.work && !item.editing">
-                                    <label class="col-sm-3 control-label">Work</label>
-                                    <div class="col-sm-9">
-                                        <p class="form-control-static" ng-hide="item.editing">{{item.work}}</p>
-                                        <input type="text" class="form-control" ng-show="item.editing" ng-model="item.work" >
-                                    </div>
-                                </div>
-                                <div class="form-group m-b-sm" ng-hide="!item.company && !item.editing">
-                                    <label class="col-sm-3 control-label">Company</label>
-                                    <div class="col-sm-9">
-                                        <p class="form-control-static" ng-hide="item.editing">{{item.company}}</p>
-                                        <input type="text" class="form-control" ng-show="item.editing" ng-model="item.company" >
-                                    </div>
-                                </div>
-                                <div class="form-group m-b-sm" ng-hide="!item.note && !item.editing">
-                                    <label class="col-sm-3 control-label">Note</label>
-                                    <div class="col-sm-9">
-                                        <p class="form-control-static" ng-hide="item.editing">{{item.note}}</p>
-                                        <textarea class="form-control" ng-show="item.editing" ng-model="item.note" rows="5"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- / fields -->
-                        </div>
-                    </div>
+                <div class="wrapper">
+                    <div class="form-group" id="allmap" ng-controller="BMapCtrl" style="width: 100%;height: 400px;"></div>
                 </div>
             </div>
         </div>
