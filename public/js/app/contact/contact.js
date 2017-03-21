@@ -41,13 +41,16 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $h
     $scope.groups.splice($scope.groups.indexOf(item), 1);
   };
 
-  $scope.selectGroup = function(item){    
+  $scope.selectGroup = function(item){
+    console.log('hit here');
     angular.forEach($scope.groups, function(item) {
       item.selected = false;
     });
     $scope.group = item;
     $scope.group.selected = true;
+    console.log(item.name);
     $scope.filter = item.name;
+
   };
 
   $scope.selectItem = function(item){    

@@ -12,6 +12,9 @@ var mongoose = require('mongoose');
 var mongodb = require('mongodb').MongoClient;
 
 var User = require('./routes/db').user;
+//var Facility = require('./routes/db').facility;
+
+var facility = require('./routes/facilityRemote');
 
 var app = express();
 
@@ -29,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/facility', facility);
 
 //main----------------------------
 //var db = mongoose.connect('mongodb://localhost/RouteInspect');
@@ -57,10 +61,30 @@ app.use('/users', users);
 //     if(err) return console.error(err);
 //     console.log(doc);
 // });
-User.find(function(err, doc){
-    if(err) return console.error(err);
-    console.log(doc);
-});
+// User.find(function(err, doc){
+//     if(err) return console.error(err);
+//     console.log(doc);
+// });
+// var temFacility = new Facility({
+//     name: '无负压供水泵',
+//     uid: 'FAB001',
+//     area: 'AR01',
+//     address: '街上',
+//     position: [0, 0],
+//     status: 0,
+//     category: 'FAB'
+// });
+//
+// temFacility.save(function(err, doc){
+//     if(err) return console.error(err);
+//     console.log(doc);
+// });
+
+// Facility.distinct('name', function(err, doc){
+//     if(err) return console.error(err);
+//     console.log(doc);
+// })
+
 //!main---------------------------
 
 // catch 404 and forward to error handler

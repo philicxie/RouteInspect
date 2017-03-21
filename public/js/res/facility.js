@@ -2,23 +2,38 @@
  * Created by philic on 2017/3/20.
  */
 app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $http, $filter) {
-    $http.get('js/app/contact/contacts.json').then(function (resp) {
-        $scope.items = resp.data.items;
-        $scope.item = $filter('orderBy')($scope.items, 'first')[0];
-        $scope.item.selected = true;
+    // $http.get('js/app/contact/contacts.json').then(function (resp) {
+    //     $scope.items = resp.data.items;
+    //     $scope.item = $filter('orderBy')($scope.items, 'first')[0];
+    //     $scope.item.selected = true;
+    // });
+
+    $http({
+        method: 'POST',
+        url: '/facility/getFacilityCates',
+        data: {}
+    }).then(function success(res){
+        console.log(res);
+        $scope.groups = [];
+        res.data.map(function(item){
+            $scope.groups.push({name: item});
+        });
+        $http({
+            method: 'POST',
+            url: '/facility/getAllFacility',
+            data: {}
+        }).then(function success(res){
+            console.log(res);
+            $scope.items = res.data;
+            $scope.item = $filter('orderBy')($scope.items, 'uid')[0];
+            $scope.item.selected = true;
+            $scope.filters = $scope.item.name;
+        });
     });
 
-    $scope.filter = '';
-    $scope.groups = [
-        {name: 'Coworkers'},
-        {name: 'Family'},
-        {name: 'Friends'},
-        {name: 'Partners'},
-        {name: 'Group'},
-        {name: 'Tem'}
 
-    ];
 
+    
     $scope.createGroup = function(){
         var group = {name: 'New Group'};
         group.name = $scope.checkItem(group, $scope.groups, 'name');
@@ -45,12 +60,14 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $h
     };
 
     $scope.selectGroup = function(item){
+        console.log('hit here');
         angular.forEach($scope.groups, function(item) {
             item.selected = false;
         });
         $scope.group = item;
         $scope.group.selected = true;
-        $scope.filter = item.name;
+        console.log(item.name);
+        $scope.filters = item.name;
     };
 
     $scope.selectItem = function(item){
@@ -64,7 +81,7 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $h
 
     $scope.deleteItem = function(item){
         $scope.items.splice($scope.items.indexOf(item), 1);
-        $scope.item = $filter('orderBy')($scope.items, 'first')[0];
+        $scope.item = $filter('orderBy')($scope.items, 'uid')[0];
         if($scope.item) $scope.item.selected = true;
     };
 
@@ -101,6 +118,4 @@ app.controller('BMapCtrl', ['$scope', function($scope){
     var map = new BMap.Map("allmap");
     var point = new BMap.Point(116.404, 39.915); //中心点和经纬度
     map.centerAndZoom(point, 15);//数字越小，显示范围越大
-    //console.log(window.innerHeight);
-    console.log(mapHeight);
 }]);
