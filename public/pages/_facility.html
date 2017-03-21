@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="wrapper b-t text-center">
-                <script type="text/ng-template" id="myModalContent.html">
+                <script type="text/ng-template" id="NewFacility">
                     <div ng-include="'pages/_facility_modal.html'"></div>
                 </script>
                 <a href class="btn btn-sm btn-default btn-addon" ng-click="createItem()"><i class="fa fa-plus fa-fw m-r-xs"></i> 新增设备</a>
@@ -77,31 +77,31 @@
             <div class="row-row">
                 <div class="wrapper" ng-controller="BMapCtrl">
                     <div class="form-group" id="allmap" ng-style="mapStyle"></div>
-                    <div class="row clearfix" style="background-color: #FFFFFF;">
-                        <div class="col-lg-1">
-                        </div>
-                        <div class="col-lg-3" style="margin-top: 15px;">
-                            <img src="img/books/{{book.book.category}}/{{book.book.url}}" style="height: 180px;">
-                        </div>
-                        <div class="col-lg-6" style="margin-top: 15px;">
-                            <div class="panel panel-default">
-                                <ul class="list-group no-radius">
-                                    <li class="list-group-item">
-                                        <h3><i class="fa fa-book"></i>&nbsp&nbsp{{book.book.name}}</h3>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5><i class="icon-pencil"></i>&nbsp&nbsp{{book.book.author}}</h5>
-                                    </li>
-                                    <li class="list-group-item">
-                                            <span class="pull-right" style="width: 120px;">
-                                                <h4>× {{book.count}}</h4>
-                                            </span>
-                                        <h4>￥{{book.book.price}}</h4>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="row clearfix" style="background-color: #FFFFFF;">-->
+                        <!--<div class="col-lg-1">-->
+                        <!--</div>-->
+                        <!--<div class="col-lg-3" style="margin-top: 15px;">-->
+                            <!--<img src="img/books/{{book.book.category}}/{{book.book.url}}" style="height: 180px;">-->
+                        <!--</div>-->
+                        <!--<div class="col-lg-6" style="margin-top: 15px;">-->
+                            <!--<div class="panel panel-default">-->
+                                <!--<ul class="list-group no-radius">-->
+                                    <!--<li class="list-group-item">-->
+                                        <!--<h3><i class="fa fa-book"></i>&nbsp&nbsp{{book.book.name}}</h3>-->
+                                    <!--</li>-->
+                                    <!--<li class="list-group-item">-->
+                                        <!--<h5><i class="icon-pencil"></i>&nbsp&nbsp{{book.book.author}}</h5>-->
+                                    <!--</li>-->
+                                    <!--<li class="list-group-item">-->
+                                            <!--<span class="pull-right" style="width: 120px;">-->
+                                                <!--<h4>× {{book.count}}</h4>-->
+                                            <!--</span>-->
+                                        <!--<h4>￥{{book.book.price}}</h4>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>

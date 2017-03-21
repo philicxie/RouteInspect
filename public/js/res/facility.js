@@ -83,10 +83,11 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', '$modal', function(
         $scope.selectItem(item);
         $scope.item.editing = true;
         $modal.open({
-            templateUrl: 'myModalContent.html',
+            templateUrl: 'NewFacility',
             controller: 'ModalInstanceCtrl',
             size: 'lg'
         });
+        
     };
 
     $scope.editItem = function(item){
@@ -109,9 +110,12 @@ app.controller('BMapCtrl', ['$scope', function($scope){
         height: mapHeight,
         margin: '0 auto'
     };
-    var map = new BMap.Map("allmap");
-    var point = new BMap.Point(116.404, 39.915); //中心点和经纬度
-    map.centerAndZoom(point, 15);//数字越小，显示范围越大
+
+    var map = new AMap.Map('allmap', {
+        resizeEnable: true,
+        zoom:11,
+        center: [116.397428, 39.90923]
+    });
 }]);
 
 
@@ -124,3 +128,20 @@ app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance',  function($scop
         $modalInstance.dismiss('cancel');
     };
 }]);
+
+app.controller('ModalMapCtrl', ['$scope', function($scope){
+    var mapHeight = Math.round(window.innerHeight*0.5)+'px';
+    var mapWidth  = Math.round(window.innerHeight*0.5*1.5)+'px';
+    $scope.modalMapStyle = {
+        width:  mapWidth,
+        height: mapHeight,
+        margin: '0 auto'
+    };
+
+    var map = new AMap.Map('modalmap', {
+        resizeEnable: true,
+        zoom:11,
+        center: [116.397428, 39.90923]
+    });
+}]);
+
