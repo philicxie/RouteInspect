@@ -1,7 +1,7 @@
 /**
  * Created by philic on 2017/3/20.
  */
-app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $http, $filter) {
+app.controller('ContactCtrl', ['$scope', '$http', '$filter', '$modal', function($scope, $http, $filter, $modal) {
     // $http.get('js/app/contact/contacts.json').then(function (resp) {
     //     $scope.items = resp.data.items;
     //     $scope.item = $filter('orderBy')($scope.items, 'first')[0];
@@ -26,19 +26,12 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $h
             console.log(res);
             $scope.items = res.data;
             $scope.item = $filter('orderBy')($scope.items, 'uid')[0];
+            $scope.group = $scope.item.name;
             $scope.item.selected = true;
             $scope.filters = $scope.item.name;
         });
     });
 
-
-
-    
-    $scope.createGroup = function(){
-        var group = {name: 'New Group'};
-        group.name = $scope.checkItem(group, $scope.groups, 'name');
-        $scope.groups.push(group);
-    };
 
     $scope.checkItem = function(obj, arr, key){
         var i=0;
@@ -53,10 +46,6 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $h
             }
         });
         return obj[key] + (i ? ' '+i : '');
-    };
-
-    $scope.deleteGroup = function(item){
-        $scope.groups.splice($scope.groups.indexOf(item), 1);
     };
 
     $scope.selectGroup = function(item){
@@ -87,12 +76,17 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', function($scope, $h
 
     $scope.createItem = function(){
         var item = {
-            group: 'Friends',
-            avatar:'img/a0.jpg'
+            group: $scope.group,
+            uid: '2333'
         };
         $scope.items.push(item);
         $scope.selectItem(item);
         $scope.item.editing = true;
+        $modal.open({
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            size: 'lg'
+        });
     };
 
     $scope.editItem = function(item){
@@ -118,4 +112,15 @@ app.controller('BMapCtrl', ['$scope', function($scope){
     var map = new BMap.Map("allmap");
     var point = new BMap.Point(116.404, 39.915); //中心点和经纬度
     map.centerAndZoom(point, 15);//数字越小，显示范围越大
+}]);
+
+
+app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance',  function($scope, $modalInstance) {
+    $scope.ok = function () {
+        $modalInstance.dismiss('ok');
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
 }]);

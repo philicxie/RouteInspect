@@ -24,9 +24,6 @@
                     </div>
                 </div>
             </div>
-            <div class="wrapper b-t text-center">
-                <a href class="btn btn-sm btn-default btn-addon" ng-click="createGroup()"><i class="fa fa-plus fa-fw m-r-xs"></i> 新增分组</a>
-            </div>
         </div>
     </div>
     <!-- /column -->
@@ -36,7 +33,7 @@
             <div class="wrapper-xs b-b">
                 <div class="input-group m-b-xxs">
                     <span class="input-group-addon input-sm no-border no-bg"><i class="icon-magnifier text-md m-t-xxs"></i></span>
-                    <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="搜索 {{group.name ? group.name : '所有设备'}}" ng-model="query">
+                    <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="在 {{group.name ? group.name : '所有设备'}} 中搜索" ng-model="query">
                 </div>
             </div>
             <div class="row-row">
@@ -47,17 +44,20 @@
                                 <a ng-repeat="item in items | filter:filters | filter:query | orderBy:'uid'" class="list-group-item m-l" ng-class="{'select m-l-none': item.selected }" ng-click="selectItem(item)">
                                   <span class="block text-ellipsis m-l-n text-md" ng-class="{'m-l-none': item.selected }">
                                     <!--{{ item.first }} <strong>{{ item.last }}</strong>-->
-                                      {{item.uid}}
+                                      <strong>{{item.uid}}</strong>
                                     <!--<span ng-hide="item.first || item.last">No Name</span>-->
                                   </span>
                                 </a>
                             </div>
                         </div>
-                        <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="(items | filter:{group:filter} | filter:query).length">无符合条件结果</div>
+                        <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="(items | filter:filters | filter:query).length">无符合条件结果</div>
                     </div>
                 </div>
             </div>
             <div class="wrapper b-t text-center">
+                <script type="text/ng-template" id="myModalContent.html">
+                    <div ng-include="'pages/_facility_modal.html'"></div>
+                </script>
                 <a href class="btn btn-sm btn-default btn-addon" ng-click="createItem()"><i class="fa fa-plus fa-fw m-r-xs"></i> 新增设备</a>
             </div>
         </div>
