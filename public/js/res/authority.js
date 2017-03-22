@@ -27,7 +27,7 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', function( $http, $s
         $modal.open({
             templateUrl: 'NewUser',
             controller: 'ModalInstanceCtrl',
-            size: 'lg'
+            size: ''
         });
     }
     $scope.pageSync = function() {
@@ -36,7 +36,7 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', function( $http, $s
 }]);
 
 
-app.controllerapp.controller('ModalInstanceCtrl', ['$scope', '$modalInstance',  function($scope, $modalInstance) {
+app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance',  function($scope, $modalInstance) {
     $scope.ok = function () {
         $modalInstance.dismiss('ok');
     };

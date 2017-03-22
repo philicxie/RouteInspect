@@ -1,38 +1,57 @@
 <div class="modal-header">
-    <h3 class="modal-title">新增设备</h3>
+    <h3 class="modal-title">新增用户</h3>
 </div>
-<div class="modal-body" ng-controller="ModalMapCtrl">
-
-    <div class="row" ng-controller="ContactCtrl" style="margin: 0 auto;">
-        <div class="col-lg-4">
-            <img src="img/facility/{{item.category}}.jpg" style="height: 150px;">
-        </div>
-        <div class="col-lg-8">
+<div class="modal-body">
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
             <div class="form-horizontal">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">名称</label>
-                    <div class="col-sm-9">
-                        <select class="form-control pull-right" ng-model="hstep" ng-options="opt for opt in options"></select>
+                    <label class="col-sm-4 control-label">账号</label>
+                    <div class="col-sm-8">
+                        <input type="text"  class="form-control">
                     </div>
                 </div>
-                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="line line-dashed b-a line-lg pull-none"></div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">编号</label>
-                    <div class="col-sm-9">
+                    <label class="col-sm-4 control-label">用户名</label>
+                    <div class="col-sm-8">
                         <input type="text"  class="form-control" placeholder="placeholder">
                     </div>
                 </div>
-                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="line line-dashed b-a line-lg pull-none"></div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">地址</label>
-                    <div class="col-sm-9">
-                        <input type="text"  class="form-control" placeholder="placeholder">
+                    <label class="col-sm-4 control-label">管理员权限</label>
+                    <div class="col-sm-6">
+                        <label class="i-switch i-switch-md bg-info m-t-xs m-r">
+                            <input type="checkbox" checked>
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="line line-dashed b-a line-lg pull-none"></div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">负责人权限</label>
+                    <div class="col-sm-6">
+                        <label class="i-switch i-switch-md bg-info m-t-xs m-r">
+                            <input type="checkbox" checked>
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="line line-dashed b-a line-lg pull-none"></div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">巡检员权限</label>
+                    <div class="col-sm-6">
+                        <label class="i-switch i-switch-md bg-info m-t-xs m-r">
+                            <input type="checkbox" checked>
+                            <i></i>
+                        </label>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="form-group" id="modalmap" ng-style="modalMapStyle"></div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-default" ng-click="cancel()">取消</button>
