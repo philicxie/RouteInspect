@@ -14,7 +14,10 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', '$modal', function(
         data: {}
     }).then(function success(res){
         console.log(res);
+        $scope.cates = res.data;
         $scope.groups = [];
+        $scope.options = $scope.cates;
+        $scope.hstep = $scope.options[0];
         res.data.map(function(item){
             $scope.groups.push({name: item});
         });
@@ -33,6 +36,7 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', '$modal', function(
     });
 
 
+
     $scope.checkItem = function(obj, arr, key){
         var i=0;
         angular.forEach(arr, function(item) {
@@ -49,14 +53,14 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', '$modal', function(
     };
 
     $scope.selectGroup = function(item){
-        console.log('hit here');
         angular.forEach($scope.groups, function(item) {
             item.selected = false;
         });
         $scope.group = item;
         $scope.group.selected = true;
-        console.log(item.name);
         $scope.filters = item.name;
+        $scope.hstep = item.name;
+        console.log($scope.hstep);
     };
 
     $scope.selectItem = function(item){
@@ -82,12 +86,13 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', '$modal', function(
         $scope.items.push(item);
         $scope.selectItem(item);
         $scope.item.editing = true;
+
         $modal.open({
             templateUrl: 'NewFacility',
             controller: 'ModalInstanceCtrl',
             size: 'lg'
         });
-        
+
     };
 
     $scope.editItem = function(item){
