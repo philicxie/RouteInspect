@@ -15,6 +15,7 @@ var User = require('./routes/db').user;
 //var Facility = require('./routes/db').facility;
 
 var facility = require('./routes/facilityRemote');
+var authority = require('./routes/authorityRemote');
 
 var app = express();
 
@@ -33,30 +34,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/facility', facility);
+app.use('/authority', authority);
 
 //main----------------------------
-//var db = mongoose.connect('mongodb://localhost/RouteInspect');
-// var address = 'mongodb://localhost:27017/RouteInspect';
-// mongodb.connect(address, function(err, db) {
-//     if(err) {
-//         console.log(err);
-//     } else {
-//         console.log('mongodb connection success');
-//         var collection = db.collection('Users');
-//         var whereStr = {name: 'xlw'};
-//         collection.find(whereStr).toArray(function(err, result){
-//             if(err) {
-//                 console.log(err);
-//                 return;
-//             }
-//             console.log(result);
-//             db.close();
-//
-//         });
-//     }
-// });
 
-// var temUser = new User({name: 'Phil', password:'432432'});
+// var temUser = new User({account: 'dyd@sjtu.edu.cn', name: 'Juicy', password:'duanduan', auth: 110});
 // temUser.save(function(err, doc){
 //     if(err) return console.error(err);
 //     console.log(doc);

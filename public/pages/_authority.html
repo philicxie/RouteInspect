@@ -7,11 +7,16 @@
             </div>
         </div>
     </div>
-    <div class="wrapper-md">
-        <button class="btn m-b-xs btn-md btn-primary btn-addon" style="width: 120px;"><i class="fa fa-plus"></i>新增用户</button>
-        <button class="btn m-b-xs btn-md btn-info btn-addon" style="width: 120px;"><i class="fa fa-refresh "></i>刷新</button>
+    <div class="wrapper-md" ng-controller="UserInfoCtrl">
+        <div>
+            <script type="text/ng-template" id="NewUser">
+                <div ng-include="'pages/_authority_modal.html'"></div>
+            </script>
+            <button class="btn m-b-xs btn-md btn-primary btn-addon" ng-click="addUser()" style="width: 120px;"><i class="fa fa-plus"></i>新增用户</button>
+            <button class="btn m-b-xs btn-md btn-info btn-addon" ng-click="pageSync()" style="width: 120px;"><i class="fa fa-refresh "></i>刷新</button>
+        </div>
         <div class="panel panel-default">
-            <div ng-controller="UserInfoCtrl">
+            <div>
                 <table ui-jq="dataTable" class="table m-b-none table-hover">
                     <thead>
                     <tr>
@@ -27,9 +32,9 @@
                         <tr id="{{user._id}}" ng-repeat="user in users">
                             <td>{{user.account}}</td>
                             <td>{{user.name}}</td>
-                            <td>{{user.au_admin}}</td>
-                            <td>{{user.au_manager}}</td>
-                            <td>{{user.au_clerk}}</td>
+                            <td><i class="fa {{user.au_admin   ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
+                            <td><i class="fa {{user.au_manager ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
+                            <td><i class="fa {{user.au_clerk   ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
                             <td><button class='btn btn-xs btn-info' ng-click='button_click()'>修改</button><button class='btn btn-xs btn-danger'>删除</button></td>
                         </tr>
                     </tbody>
