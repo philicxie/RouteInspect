@@ -6,7 +6,8 @@
       "password": "mypastword",
       "au_admin": "<i class='fa fa-check'></i>",
       "au_manager": "true",
-      "au_clerk": "true"
+      "au_clerk": "true",
+      "button": "<button class='btn btn-xs btn-info' ng-click='button_click()'>修改</button><button class='btn btn-xs btn-danger'>删除</button>"
     },
     {
       "account": "pex@sjtu.edu.cn",
@@ -14,7 +15,8 @@
       "password": "mypastword",
       "au_admin": "<i class='fa fa-check'></i>",
       "au_manager": "true",
-      "au_clerk": "true"
+      "au_clerk": "true",
+      "button": "fwefwe"
     }
   ]
 }

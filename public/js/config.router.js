@@ -68,7 +68,14 @@ angular.module('app')
               })
               .state('app._authority', {
                   url: '/_authority',
-                  templateUrl: 'pages/_authority.html'
+                  templateUrl: 'pages/_authority.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                          function( $ocLazyLoad ){
+                              return $ocLazyLoad.load(['js/res/authority.js']);
+                          }
+                      ]
+                  }
               })
               .state('app._facility', {
                   url: '/_facility',

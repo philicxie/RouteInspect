@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/RouteInspect');
 
 var userSchema = mongoose.Schema({
+    account: String,
     name: String,
     password: String,
     auth: Number

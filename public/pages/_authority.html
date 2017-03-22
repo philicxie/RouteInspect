@@ -11,27 +11,27 @@
         <button class="btn m-b-xs btn-md btn-primary btn-addon" style="width: 120px;"><i class="fa fa-plus"></i>新增用户</button>
         <button class="btn m-b-xs btn-md btn-info btn-addon" style="width: 120px;"><i class="fa fa-refresh "></i>刷新</button>
         <div class="panel panel-default">
-            <div class="table-responsive">
-                <table ui-jq="dataTable" ui-options="{
-                    sAjaxSource: 'data/users.json',
-                      aoColumns: [
-                        { mData: 'account' },
-                        { mData: 'name' },
-                        { mData: 'au_admin' },
-                        { mData: 'au_manager' },
-                        { mData: 'au_clerk' }
-                      ]
-                    }" class="table m-b-none table-hover">
+            <div ng-controller="UserInfoCtrl">
+                <table ui-jq="dataTable" class="table m-b-none table-hover">
                     <thead>
                     <tr>
                         <th  style="width:20%">账号</th>
                         <th  style="width:20%">姓名</th>
-                        <th  style="width:20%">管理员权限</th>
-                        <th  style="width:20%">负责人权限</th>
-                        <th  style="width:20%">巡检员权限</th>
+                        <th  style="width:14%">管理员权限</th>
+                        <th  style="width:14%">负责人权限</th>
+                        <th  style="width:14%">巡检员权限</th>
+                        <th  style="width:18%">修改/删除</th>
                     </tr>
                     </thead>
                     <tbody>
+                        <tr id="{{user._id}}" ng-repeat="user in users">
+                            <td>{{user.account}}</td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.au_admin}}</td>
+                            <td>{{user.au_manager}}</td>
+                            <td>{{user.au_clerk}}</td>
+                            <td><button class='btn btn-xs btn-info' ng-click='button_click()'>修改</button><button class='btn btn-xs btn-danger'>删除</button></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
