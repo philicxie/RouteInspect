@@ -9,7 +9,6 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', function( $http, $s
         url: '/authority/getAllUsers',
         data: {}
     }).then(function success(res){
-        console.log(res.data);
         res.data.map(function(item){
             $scope.users.push({
                 account: item.account,
@@ -19,16 +18,31 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', function( $http, $s
                 au_clerk:   Math.round(item.auth    )%2?true:false
             });
         });
-        console.log($scope.users);
     });
-    console.log('load here');
     $scope.addUser = function() {
+        $scope.newUser = {
+            name: "",
+            account: "",
+            au_admin: false,
+            au_manager: false,
+            au_clerk: false
+        };
         console.log('add user click');
-        $modal.open({
+        var userModalInstance = $modal.open({
             templateUrl: 'NewUser',
-            controller: 'ModalInstanceCtrl',
-            size: ''
+            controller: 'NewUserModalCtrl',
+            size: '',
+            resolve: {
+                newUser: function () {
+                    return $scope.newUser;
+                }
+            }
         });
+        userModalInstance.result.then(function (resUser){
+            console.log(resUser);
+        }, function(){
+            console.log('dismissed');
+        })
     }
     $scope.pageSync = function() {
         console.log('page sync click');
@@ -36,12 +50,36 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', function( $http, $s
 }]);
 
 
-app.controller('ModalInstanceCtrl', ['$scope', '$modalInstance',  function($scope, $modalInstance) {
+app.controller('NewUserModalCtrl', ['$scope', '$modalInstance', 'newUser', function($scope, $modalInstance, newUser) {
+    console.log('modal loaded');
+    // console.log(newUser);
+    // $scope.newUser = newUser;
+    //console.log(newUser);
+    // $scope.tem = 'fewfwe';
+    // console.log($scope.tem);
+
+    $scope.tem = $scope;
+    $scope.tem.newUser = newUser;
     $scope.ok = function () {
-        $modalInstance.dismiss('ok');
+        //console.log($scope.newUser);
+
+        //console.log($scope.tem);
+        console.log($scope.tem.newUser);
+        $modalInstance.close($scope.tem.newUser);
     };
 
     $scope.cancel = function () {
+        console.log($scope.tem);
         $modalInstance.dismiss('cancel');
+    };
+
+    $scope.changeAdmin = function() {
+        $scope.tem.newUser.au_admin = !$scope.tem.newUser.au_admin;
+    };
+    $scope.changeManager = function() {
+        $scope.tem.newUser.au_manager = !$scope.tem.newUser.au_manager;
+    };
+    $scope.changeClerk = function() {
+        $scope.tem.newUser.au_clerk = !$scope.tem.newUser.au_clerk;
     };
 }]);
