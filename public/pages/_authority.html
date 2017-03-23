@@ -35,7 +35,7 @@
                             <td><i class="fa {{user.au_admin   ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
                             <td><i class="fa {{user.au_manager ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
                             <td><i class="fa {{user.au_clerk   ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
-                            <td><button class='btn btn-xs btn-info' ng-click='button_click()'>修改</button><button class='btn btn-xs btn-danger'>删除</button></td>
+                            <td><button class="btn btn-xs btn-info" ng-click="button_click()">修改</button><button class="btn btn-xs btn-danger" ng-click="rmUser('{{user._id}}')" style="margin-left: 5px;">删除</button></td>
                         </tr>
                     </tbody>
                 </table>

@@ -11,6 +11,7 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', function( $http, $s
     }).then(function success(res){
         res.data.map(function(item){
             $scope.users.push({
+                _id: item._id,
                 account: item.account,
                 name: item.name,
                 au_admin:   Math.round(item.auth/100)%2?true:false,
@@ -28,7 +29,7 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', function( $http, $s
             au_clerk: false
         };
         console.log('add user click');
-        var userModalInstance = $modal.open({
+        var addUserModalInstance = $modal.open({
             templateUrl: 'NewUser',
             controller: 'NewUserModalCtrl',
             size: '',
@@ -38,12 +39,29 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', function( $http, $s
                 }
             }
         });
-        userModalInstance.result.then(function (resUser){
+        addUserModalInstance.result.then(function (resUser){
             console.log(resUser);
         }, function(){
             console.log('dismissed');
         })
-    }
+    };
+    $scope.rmUser = function(userId) {
+        console.log('rm user clicked' + userId);
+        var rmUserModalInstance = $modal.open({
+            templateUrl: 'RmUser',
+            controller: 'RmUserModalCtrl',
+            size: ''
+        });
+        rmUserModalInstance.result.then(function() {
+            $http({
+                method: 'POST',
+                url: '/authority/rmUserById',
+                data: userId
+            });
+        }, function() {
+            console.log('dismissed');
+        })
+    };
     $scope.pageSync = function() {
         console.log('page sync click');
     }
@@ -52,34 +70,29 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', function( $http, $s
 
 app.controller('NewUserModalCtrl', ['$scope', '$modalInstance', 'newUser', function($scope, $modalInstance, newUser) {
     console.log('modal loaded');
-    // console.log(newUser);
-    // $scope.newUser = newUser;
-    //console.log(newUser);
-    // $scope.tem = 'fewfwe';
-    // console.log($scope.tem);
-
-    $scope.tem = $scope;
-    $scope.tem.newUser = newUser;
+    $scope.temNew = $scope;
+    $scope.temNew.newUser = newUser;
     $scope.ok = function () {
-        //console.log($scope.newUser);
-
-        //console.log($scope.tem);
-        console.log($scope.tem.newUser);
-        $modalInstance.close($scope.tem.newUser);
+        console.log($scope.temNew.newUser);
+        $modalInstance.close($scope.temNew.newUser);
     };
 
     $scope.cancel = function () {
-        console.log($scope.tem);
         $modalInstance.dismiss('cancel');
     };
 
     $scope.changeAdmin = function() {
-        $scope.tem.newUser.au_admin = !$scope.tem.newUser.au_admin;
+        $scope.temNew.newUser.au_admin = !$scope.temNew.newUser.au_admin;
     };
     $scope.changeManager = function() {
-        $scope.tem.newUser.au_manager = !$scope.tem.newUser.au_manager;
+        $scope.temNew.newUser.au_manager = !$scope.temNew.newUser.au_manager;
     };
     $scope.changeClerk = function() {
-        $scope.tem.newUser.au_clerk = !$scope.tem.newUser.au_clerk;
+        $scope.temNew.newUser.au_clerk = !$scope.temNew.newUser.au_clerk;
     };
 }]);
+
+app.controller('RmUserModalCtrl', ['$scope', '$modalInstance', 'rmUser', function($scope, $modalInstance, rmUser) {
+    console.log('rm user modal loaded');
+    $scope.temRm = $scope;
+}])

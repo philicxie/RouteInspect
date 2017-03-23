@@ -15,5 +15,24 @@ router.post('/getAllUsers', function(req, res, next) {
     });
 });
 
+router.post('/rmUserById', function(req, res, next) {
+    console.log(req.data);
+    User.remove({_id: req.data}, function(err, doc) {
+        if(err) return console.error(err);
+        console.log(doc);
+        res.send(doc);
+    });
+});
+
+router.post('/addUser', function(req, res, next) {
+    console.log(res.data);
+    var addUser = new User(res.data);
+    addUser.save(function(err, doc) {
+        if(err) return console.error(err);
+        console.log(doc);
+        res.send('Add Success');
+    });
+})
+
 
 module.exports = router;
