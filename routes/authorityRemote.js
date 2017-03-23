@@ -15,24 +15,33 @@ router.post('/getAllUsers', function(req, res, next) {
     });
 });
 
-router.post('/rmUserById', function(req, res, next) {
-    console.log(req.data);
-    User.remove({_id: req.data}, function(err, doc) {
-        if(err) return console.error(err);
-        console.log(doc);
-        res.send(doc);
-    });
-});
+
 
 router.post('/addUser', function(req, res, next) {
-    console.log(res.data);
-    var addUser = new User(res.data);
+    //console.log(req.body);
+    var addUser = new User({
+        name: req.body.name,
+        account: req.body.account,
+        password: 'asdffdsa',
+        auth: 100*req.body.au_admin+10*req.body.au_manager+req.body.au_clerk
+    });
+    console.log(addUser);
     addUser.save(function(err, doc) {
         if(err) return console.error(err);
         console.log(doc);
-        res.send('Add Success');
+        res.send(doc._id);
     });
-})
+});
+
+router.post('/rmUserById', function(req, res, next) {
+    console.log(req.body);
+    User.remove({_id:req.body._id}, function(err, doc) {
+        if(err) res.send(err);
+        res.send(doc);
+    })
+});
+
+
 
 
 module.exports = router;

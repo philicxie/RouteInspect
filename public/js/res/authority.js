@@ -1,7 +1,7 @@
 /**
  * Created by philic on 2017/3/22.
  */
-app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', function( $http, $scope, $modal){
+app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', '$state', function( $http, $scope, $modal, $state){
 
     $scope.users = [];
     $http({
@@ -19,9 +19,11 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', function( $http, $s
                 au_clerk:   Math.round(item.auth    )%2?true:false
             });
         });
+    }, function(err) {
+        console.log(err);
     });
     $scope.addUser = function() {
-        $scope.newUser = {
+        $scope.userInfo = {
             name: "",
             account: "",
             au_admin: false,
@@ -30,51 +32,110 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', function( $http, $s
         };
         console.log('add user click');
         var addUserModalInstance = $modal.open({
-            templateUrl: 'NewUser',
-            controller: 'NewUserModalCtrl',
+            templateUrl: 'UserInfo',
+            controller: 'UserInfoModalCtrl',
             size: '',
             resolve: {
-                newUser: function () {
-                    return $scope.newUser;
+                isNew: function () {
+                    return true;
+                },
+                userInfo: function () {
+                    return $scope.userInfo;
                 }
             }
         });
         addUserModalInstance.result.then(function (resUser){
             console.log(resUser);
+            $http({
+                method: 'POST',
+                url: '/authority/addUser',
+                data: resUser
+            }).then(function success(res){
+                resUser._id = res.data;
+                $scope.users.push(resUser);
+            }, function(err){
+                console.log(err);
+            });
         }, function(){
             console.log('dismissed');
-        })
+        });
     };
     $scope.rmUser = function(userId) {
         console.log('rm user clicked' + userId);
         var rmUserModalInstance = $modal.open({
             templateUrl: 'RmUser',
             controller: 'RmUserModalCtrl',
-            size: ''
+            size: 'sm'
         });
-        rmUserModalInstance.result.then(function() {
+        rmUserModalInstance.result.then(function success() {
             $http({
                 method: 'POST',
                 url: '/authority/rmUserById',
-                data: userId
+                data: {_id: userId}
+            }).then(function success(res){
+                $state.reload();
+            }, function(err) {
+                console.log(err);
             });
         }, function() {
             console.log('dismissed');
-        })
+        });
     };
+
+    $scope.editUser = function(userId) {
+        console.log('edit user clicked' + userId);
+        $scope.userInfo = {};
+        for(var i=0;i<$scope.users.length;i++) {
+            if($scope.users[i]._id === userId) {
+                $scope.userInfo = $scope.users[i];
+                break;
+            }
+        }
+        console.log($scope.userInfo);
+        var editUserModalInstance = $modal.open({
+            templateUrl: 'UserInfo',
+            controller: 'UserInfoModalCtrl',
+            size: '',
+            resolve: {
+                isNew: function () {
+                    return false;
+                },
+                userInfo: function () {
+                    return $scope.userInfo;
+                }
+            }
+        });
+
+        editUserModalInstance.result.then(function (resUser){
+            console.log(resUser);
+            // $http({
+            //     method: 'POST',
+            //     url: '/authority/addUser',
+            //     data: resUser
+            // }).then(function success(res){
+            //     resUser._id = res.data;
+            //     $scope.users.push(resUser);
+            // }, function(err){
+            //     console.log(err);
+            // });
+        }, function(){
+            console.log('dismissed');
+        });
+    }
     $scope.pageSync = function() {
         console.log('page sync click');
     }
 }]);
 
 
-app.controller('NewUserModalCtrl', ['$scope', '$modalInstance', 'newUser', function($scope, $modalInstance, newUser) {
+app.controller('UserInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'userInfo', function($scope, $modalInstance, isNew, userInfo) {
     console.log('modal loaded');
     $scope.temNew = $scope;
-    $scope.temNew.newUser = newUser;
+    $scope.temNew.isNew = isNew;
+    $scope.temNew.userInfo = userInfo;
     $scope.ok = function () {
-        console.log($scope.temNew.newUser);
-        $modalInstance.close($scope.temNew.newUser);
+        console.log($scope.temNew.userInfo);
+        $modalInstance.close($scope.temNew.userInfo);
     };
 
     $scope.cancel = function () {
@@ -82,17 +143,25 @@ app.controller('NewUserModalCtrl', ['$scope', '$modalInstance', 'newUser', funct
     };
 
     $scope.changeAdmin = function() {
-        $scope.temNew.newUser.au_admin = !$scope.temNew.newUser.au_admin;
+        $scope.temNew.userInfo.au_admin = !$scope.temNew.userInfo.au_admin;
     };
     $scope.changeManager = function() {
-        $scope.temNew.newUser.au_manager = !$scope.temNew.newUser.au_manager;
+        $scope.temNew.userInfo.au_manager = !$scope.temNew.userInfo.au_manager;
     };
     $scope.changeClerk = function() {
-        $scope.temNew.newUser.au_clerk = !$scope.temNew.newUser.au_clerk;
+        $scope.temNew.userInfo.au_clerk = !$scope.temNew.userInfo.au_clerk;
     };
 }]);
 
-app.controller('RmUserModalCtrl', ['$scope', '$modalInstance', 'rmUser', function($scope, $modalInstance, rmUser) {
+app.controller('RmUserModalCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
     console.log('rm user modal loaded');
     $scope.temRm = $scope;
-}])
+    
+    $scope.ok = function(){
+        $modalInstance.close();
+    };
+    
+    $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+    };
+}]);

@@ -9,9 +9,10 @@
     </div>
     <div class="wrapper-md" ng-controller="UserInfoCtrl">
         <div>
-            <script type="text/ng-template" id="NewUser">
+            <script type="text/ng-template" id="UserInfo">
                 <div ng-include="'pages/_authority_modal.html'"></div>
             </script>
+
             <button class="btn m-b-xs btn-md btn-primary btn-addon" ng-click="addUser()" style="width: 120px;"><i class="fa fa-plus"></i>新增用户</button>
             <button class="btn m-b-xs btn-md btn-info btn-addon" ng-click="pageSync()" style="width: 120px;"><i class="fa fa-refresh "></i>刷新</button>
         </div>
@@ -28,6 +29,9 @@
                         <th  style="width:18%">修改/删除</th>
                     </tr>
                     </thead>
+                    <script type="text/ng-template" id="RmUser">
+                        <div ng-include="'pages/_authority_rm_modal.html'"></div>
+                    </script>
                     <tbody>
                         <tr id="{{user._id}}" ng-repeat="user in users">
                             <td>{{user.account}}</td>
@@ -35,7 +39,7 @@
                             <td><i class="fa {{user.au_admin   ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
                             <td><i class="fa {{user.au_manager ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
                             <td><i class="fa {{user.au_clerk   ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
-                            <td><button class="btn btn-xs btn-info" ng-click="button_click()">修改</button><button class="btn btn-xs btn-danger" ng-click="rmUser('{{user._id}}')" style="margin-left: 5px;">删除</button></td>
+                            <td><button class="btn btn-xs btn-info" ng-click="editUser('{{user._id}}')">修改</button><button class="btn btn-xs btn-danger" ng-click="rmUser('{{user._id}}')" style="margin-left: 5px;">删除</button></td>
                         </tr>
                     </tbody>
                 </table>

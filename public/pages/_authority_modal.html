@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h3 class="modal-title">新增用户</h3>
+    <h3 class="modal-title">{{temNew.isNew ? '新增用户' : '信息修改'}}</h3>
 </div>
 <div class="modal-body" >
     <div class="row">
@@ -9,14 +9,14 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">账号</label>
                     <div class="col-sm-8">
-                        <input type="text"  class="form-control" ng-model="temNew.newUser.account">
+                        <input type="text"  class="form-control" ng-model="temNew.userInfo.account">
                     </div>
                 </div>
                 <div class="line line-dashed b-a line-lg pull-none"></div>
                 <div class="form-group">
                     <label class="col-sm-4 control-label">用户名</label>
                     <div class="col-sm-8">
-                        <input type="text"  class="form-control" ng-model="temMew.newUser.name">
+                        <input type="text"  class="form-control" ng-model="temNew.userInfo.name">
                     </div>
                 </div>
                 <div class="line line-dashed b-a line-lg pull-none"></div>
@@ -24,7 +24,7 @@
                     <label class="col-sm-4 control-label">管理员权限</label>
                     <div class="col-sm-6">
                         <label class="i-switch i-switch-md bg-info m-t-xs m-r">
-                            <input type="checkbox" ng-click="changeAdmin()">
+                            <input type="checkbox" ng-click="changeAdmin()" ng-checked="{{ temNew.userInfo.au_admin }}">
                             <i></i>
                         </label>
                     </div>
@@ -34,7 +34,7 @@
                     <label class="col-sm-4 control-label">负责人权限</label>
                     <div class="col-sm-6">
                         <label class="i-switch i-switch-md bg-info m-t-xs m-r">
-                            <input type="checkbox" ng-click="changeManager()">
+                            <input type="checkbox" ng-click="changeManager()" ng-checked="{{ temNew.userInfo.au_manager }}">
                             <i></i>
                         </label>
                     </div>
@@ -44,7 +44,7 @@
                     <label class="col-sm-4 control-label">巡检员权限</label>
                     <div class="col-sm-6">
                         <label class="i-switch i-switch-md bg-info m-t-xs m-r">
-                            <input type="checkbox" ng-click="changeClerk()">
+                            <input type="checkbox" ng-click="changeClerk()" ng-checked="{{ temNew.userInfo.au_clerk }}">
                             <i></i>
                         </label>
                     </div>
