@@ -108,16 +108,22 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', '$state', function(
 
         editUserModalInstance.result.then(function (resUser){
             console.log(resUser);
-            // $http({
-            //     method: 'POST',
-            //     url: '/authority/addUser',
-            //     data: resUser
-            // }).then(function success(res){
-            //     resUser._id = res.data;
-            //     $scope.users.push(resUser);
-            // }, function(err){
-            //     console.log(err);
-            // });
+            $http({
+                method: 'POST',
+                url: '/authority/updateUserById',
+                data: resUser
+            }).then(function success(res){
+                resUser._id = res.data;
+                for(var i=0;i<$scope.users.length;i++) {
+                    if($scope.users[i]._id === resUser._id) {
+                        $scope.users[i] = resUser;
+                        console.log(resUser);
+                        break;
+                    }
+                }
+            }, function(err){
+                console.log(err);
+            });
         }, function(){
             console.log('dismissed');
         });

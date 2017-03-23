@@ -16,7 +16,6 @@ router.post('/getAllUsers', function(req, res, next) {
 });
 
 
-
 router.post('/addUser', function(req, res, next) {
     //console.log(req.body);
     var addUser = new User({
@@ -40,6 +39,18 @@ router.post('/rmUserById', function(req, res, next) {
         res.send(doc);
     })
 });
+
+router.post('/updateUserById', function(req, res, next) {
+    console.log(req.body);
+    
+    User.find({_id: req.body._id}, function(err, doc) {
+        if(err) res.error(err);
+        doc[0].name = req.body.name;
+        doc[0].auth = 100*req.body.au_admin+10*req.body.au_manager+req.body.au_clerk;
+        doc[0].save();
+        res.send(doc[0]._id);
+    });
+})
 
 
 
