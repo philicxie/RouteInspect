@@ -6,16 +6,16 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 var mongoose = require('mongoose');
-var mongodb = require('mongodb').MongoClient;
 
 var User = require('./routes/db').user;
 //var Facility = require('./routes/db').facility;
 
-var facility = require('./routes/facilityRemote');
-var authority = require('./routes/authorityRemote');
+var facility  =   require('./routes/facilityRemote' );
+var authority =   require('./routes/authorityRemote');
+var signin    =   require('./routes/signinRemote'   );
+
 
 var app = express();
 
@@ -31,10 +31,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
-app.use('/facility', facility);
-app.use('/authority', authority);
+app.use('/',          index     );
+app.use('/facility',  facility  );
+app.use('/authority', authority );
+app.use('/signin',    signin    );
 
 //main----------------------------
 
