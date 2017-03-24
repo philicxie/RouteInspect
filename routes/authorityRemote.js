@@ -17,7 +17,6 @@ router.post('/getAllUsers', function(req, res, next) {
 
 
 router.post('/addUser', function(req, res, next) {
-    //console.log(req.body);
     var addUser = new User({
         name: req.body.name,
         account: req.body.account,
@@ -50,9 +49,6 @@ router.post('/updateUserById', function(req, res, next) {
         doc[0].save();
         res.send(doc[0]._id);
     });
-})
-
-
-
+});
 
 module.exports = router;

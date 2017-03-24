@@ -17,15 +17,15 @@ angular.module('app')
       function ($stateProvider,   $urlRouterProvider) {
           
           $urlRouterProvider
-              .otherwise('/app/_dashboard');
+              .otherwise('/access/signin');
           $stateProvider
               .state('app', {
                   abstract: true,
-                  url: '/_app',
-                  templateUrl: 'tpl/layout.html'
+                  url: '/app',
+                  templateUrl: 'pages/_app.html'
               })
               .state('app._dashboard', {
-                  url:'/_dashboard',
+                  url:'/dashboard',
                   templateUrl: 'pages/_dashboard.html',
                   resolve: {
                       deps: ['$ocLazyLoad',
@@ -35,28 +35,8 @@ angular.module('app')
                       ]
                   }
               })
-              .state('app.dashboard-v1', {
-                  url: '/dashboard-v1',
-                  templateUrl: 'tpl/app_dashboard_v1.html',
-                  resolve: {
-                    deps: ['$ocLazyLoad',
-                      function( $ocLazyLoad ){
-                        return $ocLazyLoad.load(['js/controllers/chart.js']);
-                    }]
-                  }
-              })
-              .state('app.dashboard-v2', {
-                  url: '/dashboard-v2',
-                  templateUrl: 'tpl/app_dashboard_v2.html',
-                  resolve: {
-                    deps: ['$ocLazyLoad',
-                      function( $ocLazyLoad ){
-                        return $ocLazyLoad.load(['js/controllers/chart.js']);
-                    }]
-                  }
-              })
               .state('app._mission', {
-                  url: '/_mission',
+                  url: '/mission',
                   templateUrl: 'pages/_mission.html',
                   resolve: {
                       deps: ['$ocLazyLoad',
@@ -67,7 +47,7 @@ angular.module('app')
                   }
               })
               .state('app._authority', {
-                  url: '/_authority',
+                  url: '/authority',
                   templateUrl: 'pages/_authority.html',
                   resolve: {
                       deps: ['$ocLazyLoad',
@@ -78,12 +58,36 @@ angular.module('app')
                   }
               })
               .state('app._facility', {
-                  url: '/_facility',
+                  url: '/facility',
                   templateUrl: 'pages/_facility.html',
                   resolve: {
                       deps: ['uiLoad',
                           function( uiLoad ){
                               return uiLoad.load( ['js/res/facility.js']);
+                          }]
+                  }
+              })
+              .state('access', {
+                  url: '/access',
+                  template: '<div ui-view class="fade-in-right-big smooth"></div>'
+              })
+              .state('access.signin', {
+                  url: '/signin',
+                  templateUrl: 'pages/_signin.html',
+                  resolve: {
+                      deps: ['uiLoad',
+                          function( uiLoad ){
+                              return uiLoad.load( ['js/res/signin.js'] );
+                          }]
+                  }
+              })
+              .state('access.signup', {
+                  url: '/signup',
+                  templateUrl: 'tpl/page_signup.html',
+                  resolve: {
+                      deps: ['uiLoad',
+                          function( uiLoad ){
+                              return uiLoad.load( ['js/controllers/signup.js'] );
                           }]
                   }
               })
@@ -350,31 +354,6 @@ angular.module('app')
                   url: '/lockme',
                   templateUrl: 'tpl/page_lockme.html'
               })
-              .state('access', {
-                  url: '/access',
-                  template: '<div ui-view class="fade-in-right-big smooth"></div>'
-              })
-              .state('access.signin', {
-                  url: '/signin',
-                  //templateUrl: 'tpl/page_signin.html',
-                  templateUrl: 'pages/_signin.html',
-                  resolve: {
-                      deps: ['uiLoad',
-                        function( uiLoad ){
-                          return uiLoad.load( ['js/controllers/signin.js'] );
-                      }]
-                  }
-              })
-              .state('access.signup', {
-                  url: '/signup',
-                  templateUrl: 'tpl/page_signup.html',
-                  resolve: {
-                      deps: ['uiLoad',
-                        function( uiLoad ){
-                          return uiLoad.load( ['js/controllers/signup.js'] );
-                      }]
-                  }
-              })
               .state('access.forgotpwd', {
                   url: '/forgotpwd',
                   templateUrl: 'tpl/page_forgotpwd.html'
@@ -530,49 +509,6 @@ angular.module('app')
                       }]
                   }
               })
-              .state('music', {
-                  url: '/music',
-                  templateUrl: 'tpl/music.html',
-                  controller: 'MusicCtrl',
-                  resolve: {
-                      deps: ['$ocLazyLoad',
-                        function( $ocLazyLoad ){
-                          return $ocLazyLoad.load([
-                            'com.2fdevs.videogular', 
-                            'com.2fdevs.videogular.plugins.controls', 
-                            'com.2fdevs.videogular.plugins.overlayplay',
-                            'com.2fdevs.videogular.plugins.poster',
-                            'com.2fdevs.videogular.plugins.buffering',
-                            'js/app/music/ctrl.js', 
-                            'js/app/music/theme.css'
-                          ]);
-                      }]
-                  }
-              })
-                .state('music.home', {
-                    url: '/home',
-                    templateUrl: 'tpl/music.home.html'
-                })
-                .state('music.genres', {
-                    url: '/genres',
-                    templateUrl: 'tpl/music.genres.html'
-                })
-                .state('music.detail', {
-                    url: '/detail',
-                    templateUrl: 'tpl/music.detail.html'
-                })
-                .state('music.mtv', {
-                    url: '/mtv',
-                    templateUrl: 'tpl/music.mtv.html'
-                })
-                .state('music.mtvdetail', {
-                    url: '/mtvdetail',
-                    templateUrl: 'tpl/music.mtv.detail.html'
-                })
-                .state('music.playlist', {
-                    url: '/playlist/{fold}',
-                    templateUrl: 'tpl/music.playlist.html'
-                })
       }
     ]
   );

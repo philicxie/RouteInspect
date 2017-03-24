@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('app')
-  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', '$state', '$stateParams', '$cookieStore',
+  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', '$state', '$stateParams', '$cookieStore', 
     function(              $scope,   $translate,   $localStorage,   $window ,  $state ,  $stateParams ,  $cookieStore ) {
       // add 'ie' classes to html
       var isIE = !!navigator.userAgent.match(/MSIE/i);
@@ -12,7 +12,7 @@ angular.module('app')
 
       // config
       $scope.app = {
-        name: 'Angular',
+        name: '巡检系统',
         version: '1.3.3',
         // for chart colors
         color: {
@@ -36,9 +36,11 @@ angular.module('app')
           asideDock: false,
           container: false
         }
-      }
-      $scope.user = {};
-      $scope.authError = null;
+      };
+
+      console.log('main controller loaded');
+      //$scope.user = {name:'Phil'};
+      //$scope.authError = null;
       // save settings to local storage
       if ( angular.isDefined($localStorage.settings) ) {
         $scope.app.settings = $localStorage.settings;
@@ -65,15 +67,7 @@ angular.module('app')
         $translate.use(langKey);
         $scope.lang.isopen = !$scope.lang.isopen;
       };
-      // var timer = $timeout(function(){
-      //   console.log('hello world');
-      // }, 2000);
-      //
-      // timer.then(function() {
-      //   console.log('ok');
-      // }), function(){
-      //   console.log('not ok');
-      // }
+
       if($cookieStore.get('name')!==undefined) {
         console.log('get');
       } else {
