@@ -37,11 +37,7 @@ angular.module('app')
           container: false
         }
       };
-
-      console.log('main controller loaded');
-      //$scope.user = {name:'Phil'};
-      //$scope.authError = null;
-      // save settings to local storage
+      
       if ( angular.isDefined($localStorage.settings) ) {
         $scope.app.settings = $localStorage.settings;
       } else {
