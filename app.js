@@ -10,9 +10,7 @@ var facility  =   require('./routes/facilityRemote' );
 var authority =   require('./routes/authorityRemote');
 var signin    =   require('./routes/signinRemote'   );
 
-
 var app = express();
-
 
 app.all('*',function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -75,7 +73,6 @@ app.use('/signin',    signin    );
 // })
 
 //!main---------------------------
-
 
 // Test database connection
 var User = require('./routes/db').user;
