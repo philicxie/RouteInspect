@@ -41,7 +41,7 @@ app.use('/',          index     );
 app.use('/facility',  facility  );
 app.use('/authority', authority );
 app.use('/signin',    signin    );
-app.user('/mission',  mission   );
+app.use('/mission',   mission   );
 
 //main----------------------------
 

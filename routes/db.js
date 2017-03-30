@@ -21,6 +21,19 @@ var facilitySchema = mongoose.Schema({
     category: String
 });
 
+var missionSchema = mongoose.Schema({
+    uid: String,
+    facility: [String],
+    status: String,
+    category: String,
+    date: Date,
+    time: Number,
+    manager: String,
+    worker: [String],
+    abstract: String,
+    notes: [String]
+});
+
 module.exports.user = mongoose.model('Users', userSchema);
 
 module.exports.facility = mongoose.model('Facilities', facilitySchema);
