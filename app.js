@@ -9,6 +9,7 @@ var index     =   require('./routes/index'          );
 var facility  =   require('./routes/facilityRemote' );
 var authority =   require('./routes/authorityRemote');
 var signin    =   require('./routes/signinRemote'   );
+var mission   =   require('./routes/missionRemote'  );
 
 var app = express();
 
@@ -40,6 +41,7 @@ app.use('/',          index     );
 app.use('/facility',  facility  );
 app.use('/authority', authority );
 app.use('/signin',    signin    );
+app.user('/mission',  mission   );
 
 //main----------------------------
 
