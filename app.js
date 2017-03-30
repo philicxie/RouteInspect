@@ -5,13 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-
-var mongoose = require('mongoose');
-
-var User = require('./routes/db').user;
-//var Facility = require('./routes/db').facility;
-
+var index     =   require('./routes/index'          );
 var facility  =   require('./routes/facilityRemote' );
 var authority =   require('./routes/authorityRemote');
 var signin    =   require('./routes/signinRemote'   );
@@ -26,7 +20,7 @@ app.all('*',function (req, res, next) {
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
 
   if (req.method == 'OPTIONS') {
-    res.send(200); /让options请求快速返回/
+    res.send(200);
   }
   else {
     next();
@@ -81,6 +75,17 @@ app.use('/signin',    signin    );
 // })
 
 //!main---------------------------
+
+
+// Test database connection
+var User = require('./routes/db').user;
+User.find({name:'admin'}, function(err, doc) {
+  if(err) {
+    return console.error(err);
+  }
+  console.log('MongoDB Connect Success');
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
