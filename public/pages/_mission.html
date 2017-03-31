@@ -1,18 +1,21 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm">
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="MissionInfoCtrl">
     <!-- main header -->
     <div class="bg-light lter b-b wrapper-md">
         <div class="row">
-            <script type="text/ng-template" id="UserInfo">
+            <script type="text/ng-template" id="MissionInfo">
                 <div ng-include="'pages/_mission_modal.html'"></div>
             </script>
-            <div class="col-sm-12 col-xs-12">
+            <div class="col-sm-9 col-xs-9">
                 <h1 class="m-n font-thin h3 text-black">任务板</h1>
+            </div>
+            <div class="col-sm-3 col-xs-3">
+                <button class="btn btn-sm btn-primary btn-addon pull-right" ng-click="addMission()" ><i class="fa fa-plus"></i>新增任务</button>
             </div>
         </div>
     </div>
     <div class="wrapper-md">
         <div class="row">
-            <div class="col-lg-8" ng-controller="AccordionDemoCtrl">
+            <div class="col-lg-8">
                 <accordion close-others="oneAtATime">
                     <accordion-group heading="目标设备" is-open="true">
                     <p>
@@ -21,7 +24,7 @@
                     </p>
                     </accordion-group>
                     </accordion>
-                <div class="form-group" id="allmap" ng-controller="BMapCtrl" style="width: 100%;height: 500px;"></div>
+                <!--<div class="form-group" id="allmap" ng-controller="BMapCtrl" style="width: 100%;height: 500px;"></div>-->
                 <div class="panel panel-info">
                     <div class="panel-heading">任务描述</div>
                 </div>
@@ -52,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-                <accordion  close-others="oneAtATime" ng-controller="AccordionDemoCtrl">
+                <accordion  close-others="oneAtATime">
                     <accordion-group heading="执行人" is-open="true">
                         <div class="cus-list-item">
                             <span class="pull-right">张三</span>
