@@ -20,7 +20,7 @@ app.controller('MissionInfoCtrl', ['$http', '$scope', '$modal', '$state', functi
         var addMissionModalInstance = $modal.open({
             templateUrl: 'MissionInfo',
             controller: 'MissionInfoModalCtrl',
-            size: '',
+            size: 'lg',
             resolve: {
                 isNew: function () {
                     return true;
@@ -51,6 +51,17 @@ app.controller('MissionInfoCtrl', ['$http', '$scope', '$modal', '$state', functi
 
 
 app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'missionInfo', function($scope, $modalInstance, isNew, missionInfo) {
-
+    console.log('mission modal loaded');
+    $scope.missionCtrl = $scope;
+    $scope.missionCtrl.isNew = isNew;
+    $scope.missionCtrl.missionInfo = missionInfo;
+    $scope.ok = function() {
+        console.log('mission info modal closed');
+        $modalInstance.close($scope.missionCtrl.missionInfo);
+    };
+    
+    $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+    };
 }]);
 
