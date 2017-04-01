@@ -50,18 +50,78 @@ app.controller('MissionInfoCtrl', ['$http', '$scope', '$modal', '$state', functi
 }]);
 
 
-app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'missionInfo', function($scope, $modalInstance, isNew, missionInfo) {
+app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'missionInfo', '$http', function($scope, $modalInstance, isNew, missionInfo, $http) {
     console.log('mission modal loaded');
     $scope.missionCtrl = $scope;
+    $scope.missionCtrl.env = {};
+    $http({
+        method: 'POST',
+        url: '/mission/getAllManager',
+        data: ''
+    }).then(function success(res) {
+        $scope.missionCtrl.env.managers = res.data;
+    }).then($http({
+        method: 'POST',
+        url: '/mission/getAllWorker',
+        data: ''
+    }).then(function success(res) {
+        $scope.missionCtrl.env.workers = res.data;
+    }).then($http({
+        method: 'POST',
+        url: '/mission/getAllFacility',
+        data: ''
+    }).then(function success(res) {
+        $scope.missionCtrl.env.facilities = res.data;
+    })));
+
+    $scope.missionCtrl.facility = "";
     $scope.missionCtrl.isNew = isNew;
     $scope.missionCtrl.missionInfo = missionInfo;
     $scope.ok = function() {
         console.log('mission info modal closed');
-        $modalInstance.close($scope.missionCtrl.missionInfo);
+        console.log($scope.missionCtrl.dt);
+        //$modalInstance.close($scope.missionCtrl.missionInfo);
     };
     
     $scope.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
+
+    $scope.today = function() {
+        $scope.dt = new Date();
+    };
+    $scope.today();
+
+    $scope.clear = function () {
+        $scope.dt = null;
+    };
+
+    // Disable weekend selection
+    $scope.disabled = function(date, mode) {
+        return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+    };
+
+    $scope.toggleMin = function() {
+        $scope.missionCtrl.minDate = $scope.missionCtrl.minDate ? null : new Date();
+        $scope.missionCtrl.maxDate = $scope.missionCtrl.maxDate ? null : new Date();
+        $scope.missionCtrl.maxDate.setFullYear($scope.missionCtrl.maxDate.getFullYear()*1+1);
+    };
+    $scope.toggleMin();
+
+    $scope.open = function($event) {
+        console.log('data click');
+        //$event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.missionCtrl.opened = true;
+    };
+
+    $scope.missionCtrl.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 10,
+        class: 'datepicker'
+    };
+
+    $scope.missionCtrl.format = 'yyyy-MM-dd';
 }]);
 

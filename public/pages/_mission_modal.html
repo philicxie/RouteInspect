@@ -16,21 +16,49 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">目标设备</label>
                     <div class="col-sm-9">
-                        <input type="text"  class="form-control" ng-model="temNew.userInfo.name">
+                        <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.facility">
+                            <option value="{{facility.uid}}" ng-repeat="facility in missionCtrl.env.facilities">{{facility.uid}} {{facility.name}}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="line line-dashed b-a line-lg pull-none"></div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Chosen multiple</label>
+                    <label class="col-sm-3 control-label">负责人</label>
                     <div class="col-sm-9">
-                        <select ui-jq="chosen" multiple class="w-full">
-                            <option value="AK">Alaska</option>
-                            <option value="HI">Hawaii</option>
-                            <option value="CA">California</option>
-                            <option value="NV">Nevada</option>
-                            <option value="OR">Oregon</option>
-                            <option value="WA">Washington</option>
+                        <select ui-jq="chosen" class="w-full" ng-model="missionCtrl.manager">
+                            <option value="{{manager.name}}" ng-repeat="manager in missionCtrl.env.managers">{{manager.name}}</option>
                         </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">执行人</label>
+                    <div class="col-sm-9">
+                        <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.worker">
+                            <option value="{{worker.name}}" ng-repeat="worker in missionCtrl.env.workers">{{worker.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="line line-dashed b-a line-lg pull-none"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">日期</label>
+                    <div class="col-sm-9">
+                        <p class="input-group">
+                            <input type="text"
+                                   class="form-control"
+                                   datepicker-popup="{{missionCtrl.format}}"
+                                   ng-model="missionCtrl.dt"
+                                   is-open="missionCtrl.opened"
+                                   min-date="missionCtrl.minDate"
+                                   max-date="missionCtrl.maxDate"
+                                   datepicker-options="{{missionCtrl.dateOptions}}"
+                                   ng-required="true"
+                            />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </p>
                     </div>
                 </div>
             </div>
