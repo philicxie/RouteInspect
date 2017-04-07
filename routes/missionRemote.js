@@ -46,6 +46,18 @@ router.post('/getAllFacility', function(req, res, next) {
         if(err) return console.error(err);
         res.send(doc);
     })
-})
+});
+
+router.post('/createMission', function(req, res, next) {
+
+});
+
+router.post('/commitMission', function(req, res, next) {
+
+});
+
+router.post('/updateMission', function(req, res, next) {
+
+});
 
 module.exports = router;

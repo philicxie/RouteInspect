@@ -2,7 +2,7 @@
  * Created by philic on 2017/3/22.
  */
 app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', '$state', function( $http, $scope, $modal, $state){
-
+    console.log($scope.user);
     $scope.users = [];
     $http({
         method: 'POST',
