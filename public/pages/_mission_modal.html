@@ -80,6 +80,28 @@
                         </p>
                     </div>
                 </div>
+                <div class="form-group" ng-show="missionCtrl.missionInfo.category==='1'">
+                    <label class="col-sm-3 control-label">日期</label>
+                    <div class="col-sm-9">
+                        <p class="input-group">
+                            <input type="text"
+                                   class="form-control"
+                                   datepicker-popup="{{missionCtrl.format}}"
+                                   ng-model="missionCtrl.missionInfo.date"
+                                   is-open="missionCtrl.opened"
+                                   min-date="missionCtrl.minDate"
+                                   max-date="missionCtrl.maxDate"
+                                   datepicker-options="{{missionCtrl.dateOptions}}"
+                                   ng-required="true"
+                            />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
                 <div class="line line-dashed b-a line-lg pull-none"></div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">任务描述</label>
