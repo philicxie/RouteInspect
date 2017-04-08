@@ -17,14 +17,14 @@
                     <div class="col-sm-9">
                         <div class="radio">
                             <label class="i-checks i-checks-md">
-                                <input type="radio" name="a" value="0" ng-model="missionCtrl.missionInfo.category" >
+                                <input type="radio" name="missionCate" value="0" ng-model="missionCtrl.missionInfo.category" >
                                 <i></i>
                                 单次任务
                             </label>
                         </div>
                         <div class="radio">
                             <label class="i-checks i-checks-md">
-                                <input type="radio" name="a" value="1" ng-model="missionCtrl.missionInfo.category">
+                                <input type="radio" name="missionCate" value="1" ng-model="missionCtrl.missionInfo.category">
                                 <i></i>
                                 循环任务
                             </label>
@@ -84,14 +84,36 @@
                     <label class="col-sm-3 control-label">重复</label>
                     <div class="col-sm-9">
                         <label class="checkbox-inline i-checks">
-                            <input type="radio" name="roll" value="option1"><i></i> 每天
+                            <input type="radio" name="missionLoop" value="Day" ng-model="missionCtrl.missionLoop.type"><i></i> 每天
                         </label>
                         <label class="checkbox-inline i-checks">
-                            <input type="radio" name="roll" value="option2"><i></i> 每周
+                            <input type="radio" name="missionLoop" value="Week" ng-model="missionCtrl.missionLoop.type"><i></i> 每周
                         </label>
                         <label class="checkbox-inline i-checks">
-                            <input type="radio" name="roll" value="option3"><i></i> 每月
+                            <input type="radio" name="missionLoop" value="Month" ng-model="missionCtrl.missionLoop.type"><i></i> 每月
                         </label>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="missionCtrl.missionLoop.type=='Week'">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <div class="btn-group">
+                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.sun" btn-checkbox>周日</label>
+                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.mon" btn-checkbox>周一</label>
+                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.tue" btn-checkbox>周二</label>
+                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.wed" btn-checkbox>周三</label>
+                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.thu" btn-checkbox>周四</label>
+                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.fri" btn-checkbox>周五</label>
+                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.sat" btn-checkbox>周六</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="missionCtrl.missionLoop.type=='Month'">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-9">
+                        <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.missionInfo.workers">
+                            <option value="{{worker.name}}" ng-repeat="worker in missionCtrl.env.workers">{{worker.name}}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="line line-dashed b-a line-lg pull-none"></div>
