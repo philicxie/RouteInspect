@@ -108,11 +108,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group" ng-show="missionCtrl.missionLoop.type=='Month'">
+                <div class="form-group" ng-if="missionCtrl.missionLoop.type=='Month'">
                     <label class="col-sm-3 control-label"></label>
                     <div class="col-sm-9">
-                        <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.missionInfo.workers">
-                            <option value="{{worker.name}}" ng-repeat="worker in missionCtrl.env.workers">{{worker.name}}</option>
+                        <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.missionLoop.month.val" data-placeholder="对于不足31天的月份, 31日将转为当月最后一天">
+                            <option value="{{day}}" ng-repeat="day in missionCtrl.missionLoop.month.days">{{day}}日</option>
                         </select>
                     </div>
                 </div>

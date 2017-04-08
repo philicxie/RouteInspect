@@ -49,6 +49,12 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
     $scope.missionCtrl.isNew = isNew;
     $scope.missionCtrl.missionInfo = missionInfo;
     $scope.missionCtrl.missionInfo.category = 0;
+    $scope.missionCtrl.missionLoop = {};
+    $scope.missionCtrl.missionLoop.month = {};
+    $scope.missionCtrl.missionLoop.month.days = [];
+    for(var i=0;i<31;i++) {
+        $scope.missionCtrl.missionLoop.month.days.push(i+1);
+    }
     $http({
         method: 'POST',
         url: '/mission/createMission',
