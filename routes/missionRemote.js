@@ -75,18 +75,14 @@ router.post('/createMission', function(req, res, next) {
 router.post('/dismissMission', function(req, res, next) {
     console.log('post dismiss request');
     console.log(req.body);
-    Mission.find({uid: req.body.uid}, function(err, doc) {
+    Mission.remove({uid: req.body.uid}, function(err, doc){
         if(err) {
             res.send({code: 300});
             return console.error(err);
         }
-        if(doc.length === 1) {
-            doc[0].remove();
-            res.send({code: 201});
-        } else {
-            res.send({code: 301});
-        }
-    });
+        console.log(doc);
+        res.send({code: 200});
+    })
 });
 
 router.post('/commitMission', function(req, res, next) {

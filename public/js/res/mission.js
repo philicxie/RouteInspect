@@ -52,16 +52,22 @@ app.controller('MissionInfoCtrl', ['$http', '$scope', '$modal', '$state', functi
 
 app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'missionInfo', '$http', function($scope, $modalInstance, isNew, missionInfo, $http) {
     console.log('mission modal loaded');
-    $scope.initUid = '';
+    $scope.missionCtrl = $scope;
+
+    $scope.missionCtrl.initUid = '';
+    $scope.missionCtrl.facility = "";
+    $scope.missionCtrl.isNew = isNew;
+    $scope.missionCtrl.missionInfo = missionInfo;
     $http({
         method: 'POST',
         url: '/mission/createMission',
         data: {}
     }).then(function success(res){
         console.log(res.data.uid);
-        $scope.initUid = res.data.uid;
+        $scope.missionCtrl.initUid = res.data.uid;
+        $scope.missionCtrl.missionInfo.uid = 'MS-' + $scope.missionCtrl.initUid;
+
     });
-    $scope.missionCtrl = $scope;
     $scope.missionCtrl.env = {};
     $http({
         method: 'POST',
@@ -83,9 +89,7 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
         $scope.missionCtrl.env.facilities = res.data;
     })));
 
-    $scope.missionCtrl.facility = "";
-    $scope.missionCtrl.isNew = isNew;
-    $scope.missionCtrl.missionInfo = missionInfo;
+
     $scope.ok = function() {
         console.log('mission info modal closed');
         console.log($scope.missionCtrl.dt);
