@@ -93,11 +93,13 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
     };
     
     $scope.cancel = function() {
+        console.log('modal cancel clicked');
         $http({
             method: 'POST',
             url: '/mission/dismissMission',
-            data: $scope.initUid
+            data: {uid: $scope.initUid}
         }).then(function success(res){
+            console.log(res);
             $modalInstance.dismiss('cancel');
         });
     };

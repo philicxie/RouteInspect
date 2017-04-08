@@ -55,11 +55,11 @@ router.post('/createMission', function(req, res, next) {
     var sortDoc = function(a, b) {
         return a.uid < b.uid;
     };
+    
     Mission.find(function(err, doc) {
         if(err) {
             return console.error(err);
         }
-        console.log(doc);
         doc.sort(sortDoc);
         var initId = doc[0].uid*1+1;
         console.log(initId);
@@ -72,15 +72,8 @@ router.post('/createMission', function(req, res, next) {
     });
 });
 
-router.post('/commitMission', function(req, res, next) {
-
-});
-
-router.post('/updateMission', function(req, res, next) {
-
-});
-
 router.post('/dismissMission', function(req, res, next) {
+    console.log('post dismiss request');
     console.log(req.body);
     Mission.find({uid: req.body.uid}, function(err, doc) {
         if(err) {
@@ -95,5 +88,16 @@ router.post('/dismissMission', function(req, res, next) {
         }
     });
 });
+
+router.post('/commitMission', function(req, res, next) {
+    console.log(req.body);
+    res.send('ok');
+});
+
+router.post('/updateMission', function(req, res, next) {
+    res.send('ok');
+});
+
+
 
 module.exports = router;
