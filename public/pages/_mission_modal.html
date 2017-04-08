@@ -12,6 +12,25 @@
                         <input type="text"  class="form-control" ng-model="missionCtrl.missionInfo.uid" ng-disabled="true">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">任务类型</label>
+                    <div class="col-sm-9">
+                        <div class="radio">
+                            <label class="i-checks i-checks-md">
+                                <input type="radio" name="a" value="0" ng-model="missionCtrl.missionInfo.category" >
+                                <i></i>
+                                单次任务
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="i-checks i-checks-md">
+                                <input type="radio" name="a" value="1" ng-model="missionCtrl.missionInfo.category">
+                                <i></i>
+                                循环任务
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="line line-dashed b-a line-lg pull-none"></div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">目标设备</label>
@@ -59,6 +78,13 @@
                                 </button>
                             </span>
                         </p>
+                    </div>
+                </div>
+                <div class="line line-dashed b-a line-lg pull-none"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">任务描述</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" rows="6" placeholder="请在此处输入..." ng-model="missionCtrl.missionInfo.abstract"></textarea>
                     </div>
                 </div>
             </div>

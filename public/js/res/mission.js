@@ -88,7 +88,7 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
 
     $scope.ok = function() {
         console.log('mission info modal closed');
-        console.log($scope.missionCtrl.missionInfo.date);
+        console.log($scope.missionCtrl.missionInfo);
         //$modalInstance.close($scope.missionCtrl.missionInfo);
     };
     
