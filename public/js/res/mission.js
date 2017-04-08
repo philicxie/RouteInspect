@@ -16,7 +16,6 @@ app.controller('MissionInfoCtrl', ['$http', '$scope', '$modal', '$state', functi
             date: '',
             time: ''
         };
-        console.log('add mission click');
         var addMissionModalInstance = $modal.open({
             templateUrl: 'MissionInfo',
             controller: 'MissionInfoModalCtrl',
@@ -131,7 +130,6 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
 
     $scope.open = function($event) {
         console.log('data click');
-        //$event.preventDefault();
         $event.stopPropagation();
 
         $scope.missionCtrl.opened = true;

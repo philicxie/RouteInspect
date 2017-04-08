@@ -73,8 +73,6 @@ router.post('/createMission', function(req, res, next) {
 });
 
 router.post('/dismissMission', function(req, res, next) {
-    console.log('post dismiss request');
-    console.log(req.body);
     Mission.remove({uid: req.body.uid}, function(err, doc){
         if(err) {
             res.send({code: 300});
@@ -87,12 +85,30 @@ router.post('/dismissMission', function(req, res, next) {
 
 router.post('/commitMission', function(req, res, next) {
     console.log(req.body);
-    res.send('ok');
+    Mission.find({uid: req.body.uid}, function(err, doc){
+        if(err) {
+            res.send({code: 300});
+            return console.err(error);
+        }
+        console.log(doc);
+        doc[0].facility =   req.body.facility;
+        doc[0].status =     req.body.status;
+        doc[0].date =       req.body.date;
+        doc[0].manager =    req.body.manager;
+        doc[0].worker =     req.body.worker;
+        doc[0].abstract =   req.body.abstract;
+        
+        doc[0].save(function(err, doc){
+            if(err) {
+                res.send({code: 301});
+                return console.err(error);
+            }
+            res.send({code: 200});
+        });
+    });
 });
 
-router.post('/updateMission', function(req, res, next) {
-    res.send('ok');
-});
+
 
 
 

@@ -76,5 +76,8 @@ angular.module('app')
           // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
           return (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
       }
+      $scope.testFunc = function () {
+        console.log('test ' + new Date());
+      };
 
   }]);
