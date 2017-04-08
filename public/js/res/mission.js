@@ -48,6 +48,7 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
     $scope.missionCtrl.facility = "";
     $scope.missionCtrl.isNew = isNew;
     $scope.missionCtrl.missionInfo = missionInfo;
+    $scope.missionCtrl.missionInfo.category = 0;
     $http({
         method: 'POST',
         url: '/mission/createMission',
