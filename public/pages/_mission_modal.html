@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">目标设备</label>
                     <div class="col-sm-9">
-                        <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.facility">
+                        <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.missionInfo.facility">
                             <option value="{{facility.uid}}" ng-repeat="facility in missionCtrl.env.facilities">{{facility.uid}} {{facility.name}}</option>
                         </select>
                     </div>
@@ -25,7 +25,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">负责人</label>
                     <div class="col-sm-9">
-                        <select ui-jq="chosen" class="w-full" ng-model="missionCtrl.manager">
+                        <select ui-jq="chosen" class="w-full" ng-model="missionCtrl.missionInfo.manager">
                             <option value="{{manager.name}}" ng-repeat="manager in missionCtrl.env.managers">{{manager.name}}</option>
                         </select>
                     </div>
@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">执行人</label>
                     <div class="col-sm-9">
-                        <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.worker">
+                        <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.missionInfo.worker">
                             <option value="{{worker.name}}" ng-repeat="worker in missionCtrl.env.workers">{{worker.name}}</option>
                         </select>
                     </div>
@@ -46,7 +46,7 @@
                             <input type="text"
                                    class="form-control"
                                    datepicker-popup="{{missionCtrl.format}}"
-                                   ng-model="missionCtrl.dt"
+                                   ng-model="missionCtrl.missionInfo.date"
                                    is-open="missionCtrl.opened"
                                    min-date="missionCtrl.minDate"
                                    max-date="missionCtrl.maxDate"

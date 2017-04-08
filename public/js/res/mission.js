@@ -31,16 +31,7 @@ app.controller('MissionInfoCtrl', ['$http', '$scope', '$modal', '$state', functi
         });
         addMissionModalInstance.result.then(function (resMission) {
             console.log(resMission);
-            // $http({
-            //     method: 'POST',
-            //     url: '/authority/addUser',
-            //     data: resUser
-            // }).then(function success(res){
-            //     resUser._id = res.data;
-            //     $scope.users.push(resUser);
-            // }, function(err){
-            //     console.log(err);
-            // });
+
         }, function(){
             console.log('dismissed');
         });
@@ -88,10 +79,16 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
         $scope.missionCtrl.env.facilities = res.data;
     })));
 
+    $scope.missionCtrl.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 10,
+        class: 'datepicker'
+    };
+    $scope.missionCtrl.format = 'yyyy-MM-dd';
 
     $scope.ok = function() {
         console.log('mission info modal closed');
-        console.log($scope.missionCtrl.dt);
+        console.log($scope.missionCtrl.missionInfo.date);
         //$modalInstance.close($scope.missionCtrl.missionInfo);
     };
     
@@ -108,12 +105,12 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
     };
 
     $scope.today = function() {
-        $scope.dt = new Date();
+        $scope.missionCtrl.missionInfo.date = new Date();
     };
     $scope.today();
 
     $scope.clear = function () {
-        $scope.dt = null;
+        $scope.missionCtrl.missionInfo.date = null;
     };
 
     // Disable weekend selection
@@ -134,13 +131,5 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
 
         $scope.missionCtrl.opened = true;
     };
-
-    $scope.missionCtrl.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 10,
-        class: 'datepicker'
-    };
-
-    $scope.missionCtrl.format = 'yyyy-MM-dd';
 }]);
 
