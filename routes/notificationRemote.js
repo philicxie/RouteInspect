@@ -7,7 +7,7 @@ var express = require('express');
 var router = express.Router();
 
 router.post('/getNotificationsOnUser', function(req, res, next) {
-    Notification({userId: req.body.userId}, function(err, doc) {
+    Notification.find({userId: req.body.userId}, function(err, doc) {
         if(err) {
             res.send({code: 300});
             return console.error(err);

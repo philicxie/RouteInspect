@@ -22,6 +22,7 @@ app.controller('SigninFormController', ['$scope', '$http', '$state', '$rootScope
                     url: '/notification/getNotificationsOnUser',
                     data: {userId: res.data.user._id}
                 }).then(function success(res){
+                    console.log(res);
                     if(res.data.code === 200) {
                         $rootScope.user.notes = res.data.notification;
                     }
