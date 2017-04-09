@@ -5,25 +5,27 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index     =   require('./routes/index'          );
-var facility  =   require('./routes/facilityRemote' );
-var authority =   require('./routes/authorityRemote');
-var signin    =   require('./routes/signinRemote'   );
-var mission   =   require('./routes/missionRemote'  );
+var index = require('./routes/index');
+var facility = require('./routes/facilityRemote');
+var authority = require('./routes/authorityRemote');
+var signin = require('./routes/signinRemote');
+var mission = require('./routes/missionRemote');
+var notification = require('./routes/notificationRemote');
+
 
 var app = express();
 
-app.all('*',function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+app.all('*', function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
 
-  if (req.method == 'OPTIONS') {
-    res.send(200);
-  }
-  else {
-    next();
-  }
+    if (req.method == 'OPTIONS') {
+        res.send(200);
+    }
+    else {
+        next();
+    }
 });
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,15 +35,16 @@ app.set('view engine', 'ejs');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/',          index     );
-app.use('/facility',  facility  );
-app.use('/authority', authority );
-app.use('/signin',    signin    );
-app.use('/mission',   mission   );
+app.use('/', index);
+app.use('/facility', facility);
+app.use('/authority', authority);
+app.use('/signin', signin);
+app.use('/mission', mission);
+app.use('/notification', notification);
 
 //main----------------------------
 
@@ -78,29 +81,29 @@ app.use('/mission',   mission   );
 
 // Test database connection
 var User = require('./routes/db').user;
-User.find({name:'admin'}, function(err, doc) {
-  if(err) {
-    return console.error(err);
-  }
-  console.log('MongoDB Connect Success');
+User.find({name: 'admin'}, function (err, doc) {
+    if (err) {
+        return console.error(err);
+    }
+    console.log('MongoDB Connect Success');
 });
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;
