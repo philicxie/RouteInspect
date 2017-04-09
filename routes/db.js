@@ -34,8 +34,18 @@ var missionSchema = mongoose.Schema({
     notes       :       [String]
 });
 
-module.exports.user     = mongoose.model('Users',       userSchema      );
+var notificationSchema = mongoose.Schema({
+    userId      :       String,
+    title       :       String,
+    time        :       Date,
+    url         :       String,
+    notes       :       [String]
+});
 
-module.exports.facility = mongoose.model('Facilities',  facilitySchema  );
+module.exports.user             = mongoose.model('Users',           userSchema          );
 
-module.exports.mission  = mongoose.model('Missions',    missionSchema   );
+module.exports.facility         = mongoose.model('Facilities',      facilitySchema      );
+
+module.exports.mission          = mongoose.model('Missions',        missionSchema       );
+
+module.exports.notification     = mongoose.model('Notifications',   notificationSchema  );
