@@ -92,6 +92,7 @@
 
             var onStartEvent = function(e)
             {
+                console.log(e);
                 var handle = $(e.target);
                 if (!handle.hasClass(list.options.handleClass)) {
                     if (handle.closest('.' + list.options.noDragClass).length) {
@@ -102,8 +103,9 @@
                 if (!handle.length || list.dragEl || (!hasTouch && e.button !== 0) || (hasTouch && e.touches.length !== 1)) {
                     return;
                 }
-                e.preventDefault();
+                //e.preventDefault();
                 list.dragStart(hasTouch ? e.touches[0] : e);
+
             };
 
             var onMoveEvent = function(e)
@@ -117,7 +119,7 @@
             var onEndEvent = function(e)
             {
                 if (list.dragEl) {
-                    e.preventDefault();
+                    //e.preventDefault();
                     list.dragStop(hasTouch ? e.touches[0] : e);
                 }
             };
@@ -305,7 +307,6 @@
 
         dragMove: function(e)
         {
-
             var list, parent, prev, next, depth,
                 opt   = this.options,
                 mouse = this.mouse;
@@ -415,7 +416,6 @@
                 this.pointEl = this.pointEl.parent(opt.itemNodeName);
             }
             if (this.pointEl.hasClass(opt.emptyClass)) {
-                console.log('empty');
                 isEmpty = true;
             }
             else if (!this.pointEl.length || !this.pointEl.hasClass(opt.itemClass)) {
@@ -457,8 +457,6 @@
                 if (!parent.children().length) {
                     this.unsetParent(parent.parent());
                 }
-                console.log(this.dragRootEl.find(opt.itemNodeName).length);
-                console.log(this.dragRootEl.find('div').length);
                 if (this.dragRootEl.find(opt.itemNodeName).length===0 && this.dragRootEl.find('div').length===0) {
                     this.dragRootEl.append('<div class="' + opt.emptyClass + '"/>');
                 }
@@ -469,7 +467,6 @@
                 }
             }
         }
-
     };
 
     $.fn.nestable = function(params)
