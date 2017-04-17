@@ -296,6 +296,8 @@
             var el = this.dragEl.children(this.options.itemNodeName).first();
             el[0].parentNode.removeChild(el[0]);
             this.placeEl.replaceWith(el);
+            console.log(typeof el);
+            console.log(el[0].parentNode.id);
 
             this.dragEl.remove();
             this.el.trigger('change');
@@ -410,7 +412,6 @@
             }
             this.pointEl = $(document.elementFromPoint(e.pageX - document.body.scrollLeft, e.pageY - (window.pageYOffset || document.documentElement.scrollTop)));
             if (!hasPointerEvents) {
-                console.log('visi');
                 this.dragEl[0].style.visibility = 'visible';
             }
             if (this.pointEl.hasClass(opt.handleClass)) {
