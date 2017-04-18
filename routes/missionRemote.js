@@ -8,6 +8,9 @@ var Mission = require('../routes/db').mission;
 var express = require('express');
 var router = express.Router();
 
+var temMission = new Mission({uid: 1000});
+temMission.save();
+
 router.post('/getAllUsers', function(req, res, next) {
     User.find(function(err, doc) {
         if(err) return console.error(err);
@@ -58,17 +61,19 @@ router.post('/createMission', function(req, res, next) {
     
     Mission.find(function(err, doc) {
         if(err) {
+            res.send({code: 300});
             return console.error(err);
+        } else {
+            doc.sort(sortDoc);
+            var initId = doc[0].uid * 1 + 1;
+            console.log(initId);
+            var initMission = new Mission({
+                uid: initId,
+                status: 0
+            });
+            initMission.save();
+            res.send({code: 200, uid: initId});
         }
-        doc.sort(sortDoc);
-        var initId = doc[0].uid*1+1;
-        console.log(initId);
-        var initMission = new Mission({
-            uid: initId,
-            status: 0
-        });
-        initMission.save();
-        res.send({code: 200, uid: initId});
     });
 });
 

@@ -106,9 +106,8 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
         url: '/mission/createMission',
         data: {}
     }).then(function success(res){
-        console.log(res.data.uid);
         $scope.missionCtrl.initUid = res.data.uid;
-        $scope.missionCtrl.missionInfo.uid = 'MS-' + $scope.missionCtrl.initUid;
+        $scope.missionCtrl.missionInfo.uid = 'MS-S-' + $scope.missionCtrl.initUid;
 
     });
     $scope.missionCtrl.env = {};
@@ -142,6 +141,7 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
     $scope.ok = function() {
         console.log('mission info modal closed');
         console.log($scope.missionCtrl.missionInfo);
+        conosle.log($scope.missionCtrl.missionLoop);
         //$modalInstance.close($scope.missionCtrl.missionInfo);
     };
 
@@ -183,5 +183,21 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
         $event.stopPropagation();
 
         $scope.missionCtrl.opened = true;
+    };
+
+    $scope.changeCateToSingle = function() {
+        console.log('change single');
+        console.log($scope.missionCtrl.initUid);
+        if($scope.missionCtrl.missionInfo) {
+            $scope.missionCtrl.missionInfo.uid = 'MS-S-'+$scope.missionCtrl.initUid;
+        }
+    };
+
+    $scope.changeCateToRoll = function() {
+        console.log('change roll');
+        console.log($scope.missionCtrl.initUid);
+        if($scope.missionCtrl.missionInfo) {
+            $scope.missionCtrl.missionInfo.uid = 'MS-R-'+$scope.missionCtrl.initUid;
+        }
     };
 }]);

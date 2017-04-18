@@ -16,14 +16,14 @@
                     <label class="col-sm-3 control-label">任务类型</label>
                     <div class="col-sm-9">
                         <div class="radio">
-                            <label class="i-checks i-checks-md">
+                            <label class="i-checks i-checks-md" ng-click="changeCateToSingle()">
                                 <input type="radio" name="missionCate" value="0" ng-model="missionCtrl.missionInfo.category" >
                                 <i></i>
                                 单次任务
                             </label>
                         </div>
                         <div class="radio">
-                            <label class="i-checks i-checks-md">
+                            <label class="i-checks i-checks-md" ng-click="changeCateToRoll()">
                                 <input type="radio" name="missionCate" value="1" ng-model="missionCtrl.missionInfo.category">
                                 <i></i>
                                 循环任务

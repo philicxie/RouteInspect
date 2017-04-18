@@ -27,7 +27,7 @@ var missionSchema = mongoose.Schema({
     status      :       String,
     category    :       String,
     date        :       Date,
-    time        :       Number,
+    times       :       [Number],
     manager     :       String,
     worker      :       [String],
     abstract    :       String,
