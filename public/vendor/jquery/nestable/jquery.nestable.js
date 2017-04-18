@@ -2,7 +2,7 @@
  * Nestable jQuery Plugin - Copyright (c) 2012 David Bushell - http://dbushell.com/
  * Dual-licensed under the BSD or MIT licenses
  */
-;(function($, window, document, undefined)
+;(function($, window, document, undefined, $scope)
 {
     var hasTouch = 'ontouchstart' in window;
 
@@ -92,7 +92,6 @@
 
             var onStartEvent = function(e)
             {
-                console.log(e);
                 var handle = $(e.target);
                 if (!handle.hasClass(list.options.handleClass)) {
                     if (handle.closest('.' + list.options.noDragClass).length) {
@@ -255,7 +254,6 @@
                 dragItem = target.closest(this.options.itemNodeName);
 
             this.placeEl.css('height', dragItem.height());
-            console.log(dragItem);
             mouse.offsetX = e.offsetX !== undefined ? e.offsetX : e.pageX - target.offset().left;
             mouse.offsetY = e.offsetY !== undefined ? e.offsetY : e.pageY - target.offset().top;
             mouse.startX = mouse.lastX = e.pageX;
@@ -290,14 +288,23 @@
 
         dragStop: function(e)
         {
-
             // fix for zepto.js
             //this.placeEl.replaceWith(this.dragEl.children(this.options.itemNodeName + ':first').detach());
+
             var el = this.dragEl.children(this.options.itemNodeName).first();
+            //console.log(el[0]);
+            !(el[0].click)();
+
+
+            //console.log(this.el[0].id);
+
             el[0].parentNode.removeChild(el[0]);
             this.placeEl.replaceWith(el);
-            console.log(typeof el);
-            console.log(el[0].parentNode.id);
+
+            //console.log(el[0].parentNode.parentNode.id);
+            //console.log(this.el[0].id);
+
+
 
             this.dragEl.remove();
             this.el.trigger('change');
@@ -306,6 +313,8 @@
             }
 
             this.reset();
+
+
         },
 
         dragMove: function(e)

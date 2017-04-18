@@ -8,9 +8,9 @@
     margin: 0; padding: 0;
     max-width: 600px;
     list-style: none;
-    font-size: 13px;
-    line-height: 20px;
-    min-height: 600px;
+    font-size: 10px;
+    line-height: 10px;
+    min-height: 1200px;
 }
 
 .dd-list {
@@ -33,7 +33,7 @@
     padding: 0;
     min-height: 0px;
     font-size: 10px;
-    line-height: 50px;
+    line-height: 0px;
     border-radius: 5px;
 }
 
@@ -42,24 +42,92 @@
     margin: 5px 5px;
     padding: 10px 10px; 
     text-decoration: none; 
-    border: 2px solid #dee5e7;
+    border: 2px solid #ffffff;
     background: #fff;
+    box-shadow: 3px 3px 3px #888888;
+
     -webkit-border-radius: 8px;
             border-radius: 8px;
 }
 .dd-handle:hover {
     background: #fff;
-    border: 2px solid #bbbbbb;
+    border: 2px solid #999999;
 }
 
 .dd-item > button { display: block; position: relative; cursor: pointer; float: left; width: 25px; height: 30px; margin: 5px 0; padding: 0; text-indent: 100%; white-space: nowrap; overflow: hidden; border: 0; background: transparent; font-size: 12px; line-height: 1; text-align: center; font-weight: bold; }
 .dd-item > button:before { content: '+'; display: block; position: absolute; width: 100%; text-align: center; text-indent: 0; }
 .dd-item > button[data-action="collapse"]:before { content: '-'; }
 
+
+.dd-plan .dd-handle {
+    background-color: #428bca;
+}
+.dd-plan  .dd-title {
+    color: #fff;
+}
+
+.dd-plan .line {
+    border: 1px solid #bce8f1;
+}
+
+.dd-plan .dd-handle:hover {
+    border: 2px solid #428bca;
+}
+
+.dd-process .dd-handle {
+    background-color: #d9edf7;
+}
+
+.dd-process .dd-title {
+    color: #31708f;
+}
+
+.dd-process .line {
+    border: 1px solid #bce8f1;
+}
+
+.dd-process .dd-handle:hover {
+    border: 2px solid #bce8f1;
+}
+
+
+.dd-confirm .dd-handle {
+    background-color: #fcf8e3;
+}
+
+.dd-confirm .dd-title {
+    color: #8a6d3b;
+}
+
+.dd-confirm .line {
+    border: 1px solid #faebcc;
+}
+
+.dd-confirm .dd-handle:hover {
+    border: 2px solid #faebcc;
+}
+
+.dd-complete .dd-handle {
+    background-color: #DFF0D8;
+}
+
+.dd-complete .dd-title {
+    color: #3c763d;
+}
+
+.dd-complete .line {
+    border: 1px solid #d6e9c6;
+}
+
+.dd-complete .dd-handle:hover {
+    border: 2px solid #d6e9c6;
+}
+
+
 .dd-placeholder,
 .dd-empty {
     margin: 5px 5px;
-    min-height: 30px;
+    min-height: 0px;
     background: #FFFFFF;
     border: 2px dashed #dee5e7;
     box-sizing: border-box;
@@ -69,7 +137,7 @@
 .dd-empty {
     padding: 10px 10px;
     border: 2px dashed #ffffff;
-    min-height: 100px;
+    min-height: 300px;
     background-color: #ffffff;
     background-size: 60px 60px;
     background-position: 0 0, 30px 30px;

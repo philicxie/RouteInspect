@@ -1,15 +1,12 @@
-.cus-dd-item {
-    border-radius: 5px;
-}
 
-.cus-dd-handle {
-    border-radius: 10px !important;
-    -webkit-border-radius: 10px !important;
-}
 
 .cus-col {
     padding-left:  5px !important;
     padding-right: 5px !important;
+}
+
+.cus-shadow {
+    box-shadow: 3px 3px 3px #888888;
 }
 
 .cus-hidden {
