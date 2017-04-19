@@ -98,13 +98,19 @@
                     <label class="col-sm-3 control-label"></label>
                     <div class="col-sm-9">
                         <div class="btn-group">
-                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.sun" btn-checkbox>周日</label>
-                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.mon" btn-checkbox>周一</label>
-                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.tue" btn-checkbox>周二</label>
-                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.wed" btn-checkbox>周三</label>
-                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.thu" btn-checkbox>周四</label>
-                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.fri" btn-checkbox>周五</label>
-                            <label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.sat" btn-checkbox>周六</label>
+                            <label
+                                    class="btn btn-default"
+                                    ng-repeat="day in missionCtrl.missionLoop.days"
+                                    ng-model="day.chosen"
+                                    btn-checkbox>{{day.value}}
+                            </label>
+                            <!--<label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.sun" btn-checkbox>周日</label>-->
+                            <!--<label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.mon" btn-checkbox>周一</label>-->
+                            <!--<label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.tue" btn-checkbox>周二</label>-->
+                            <!--<label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.wed" btn-checkbox>周三</label>-->
+                            <!--<label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.thu" btn-checkbox>周四</label>-->
+                            <!--<label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.fri" btn-checkbox>周五</label>-->
+                            <!--<label class="btn btn-default" ng-model="missionCtrl.missionLoop.week.sat" btn-checkbox>周六</label>-->
                         </div>
                     </div>
                 </div>

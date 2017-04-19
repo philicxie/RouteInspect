@@ -5356,6 +5356,27 @@ a.list-group-item-danger.active:focus {
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #428bca;
 }
+
+.panel-plan {
+  border-color: #cec1f5;
+}
+.panel-plan > .panel-heading {
+  color: #6254b2;
+  background-color: #dfd7f5;
+  border-color: #cec1f5;
+}
+.panel-plan > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #cec1f5;
+}
+.panel-plan > .panel-heading .badge {
+  color: #6254b2;
+  background-color: #dfd7f5;
+}
+.panel-plan > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #6254b2;
+}
+
+
 .panel-success {
   border-color: #d6e9c6;
 }

@@ -73,7 +73,6 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
 
 
     $scope.itemClick = function(e) {
-        console.log(e);
         console.log(e.target.parentNode.parentNode);
 
         console.log('this key down');
@@ -89,7 +88,7 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
 app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'missionInfo', '$http', function($scope, $modalInstance, isNew, missionInfo, $http) {
     console.log('mission modal loaded');
     $scope.missionCtrl = $scope;
-
+    $scope.missionCtrl.dayVals = ['周日','周一','周二','周三','周四','周五','周六'];
     $scope.missionCtrl.initUid = '';
     $scope.missionCtrl.facility = "";
     $scope.missionCtrl.isNew = isNew;
@@ -98,6 +97,13 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
     $scope.missionCtrl.missionLoop = {};
     $scope.missionCtrl.missionLoop.month = {};
     $scope.missionCtrl.missionLoop.month.days = [];
+    $scope.missionCtrl.missionLoop.days = [];
+    for(var i=0;i<7;i++) {
+        $scope.missionCtrl.missionLoop.days.push({
+            chosen: false,
+            value: $scope.missionCtrl.dayVals[i]
+        });
+    }
     for(var i=0;i<31;i++) {
         $scope.missionCtrl.missionLoop.month.days.push(i+1);
     }
@@ -141,7 +147,7 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
     $scope.ok = function() {
         console.log('mission info modal closed');
         console.log($scope.missionCtrl.missionInfo);
-        conosle.log($scope.missionCtrl.missionLoop);
+        console.log($scope.missionCtrl.missionLoop);
         //$modalInstance.close($scope.missionCtrl.missionInfo);
     };
 
@@ -149,7 +155,8 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
         console.log('modal cancel clicked');
         $http({
             method: 'POST',
-            url: '/mission/dismissMission',
+
+            
             data: {uid: $scope.initUid}
         }).then(function success(res){
             console.log(res);
@@ -179,23 +186,17 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
     $scope.toggleMin();
 
     $scope.open = function($event) {
-        console.log('data click');
         $event.stopPropagation();
-
         $scope.missionCtrl.opened = true;
     };
 
     $scope.changeCateToSingle = function() {
-        console.log('change single');
-        console.log($scope.missionCtrl.initUid);
         if($scope.missionCtrl.missionInfo) {
             $scope.missionCtrl.missionInfo.uid = 'MS-S-'+$scope.missionCtrl.initUid;
         }
     };
 
     $scope.changeCateToRoll = function() {
-        console.log('change roll');
-        console.log($scope.missionCtrl.initUid);
         if($scope.missionCtrl.missionInfo) {
             $scope.missionCtrl.missionInfo.uid = 'MS-R-'+$scope.missionCtrl.initUid;
         }

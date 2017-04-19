@@ -60,18 +60,18 @@
 
 
 .dd-plan .dd-handle {
-    background-color: #428bca;
+    background-color: #dfd7f5;
 }
 .dd-plan  .dd-title {
-    color: #fff;
+    color: #6254b2;
 }
 
 .dd-plan .line {
-    border: 1px solid #bce8f1;
+    border: 1px solid #cec1f5;
 }
 
 .dd-plan .dd-handle:hover {
-    border: 2px solid #428bca;
+    border: 2px solid #cec1f5;
 }
 
 .dd-process .dd-handle {
