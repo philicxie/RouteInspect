@@ -63,11 +63,11 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
                 facility: resMission.mission.facility,
                 abstract: resMission.mission.abstract
             };
-            if(resCategory === 'SINGLE') {
+            if(resMission.category === 'SINGLE') {
 
             } else {
                 reqMission.mission.category = resMission.mission.category;
-                reqMission.dates = resMission.mission.dates;
+                reqMission.mission.dates = resMission.mission.dates;
             }
             console.log(reqMission);
             $http({
@@ -171,12 +171,11 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'missionInfo
                 case 'DAY':
                     break;
                 case 'WEEK':
-                    $scope.missionCtrl.missionLoop.days.map(function(day) {
-                        if(day.chosen) {
-                            console.log(day.value);
-                            dates.push(day.value);
+                    for(var i=0;i<7;i++) {
+                        if($scope.missionCtrl.missionLoop.days[i].chosen) {
+                            dates.push(i);
                         }
-                    });
+                    }
                     break;
                 case 'MONTH':
                     dates = $scope.missionCtrl.missionLoop.month.days;
@@ -185,6 +184,7 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'missionInfo
                     break;
             }
             $scope.missionCtrl.missionInfo.dates = dates;
+            $scope.missionCtrl.missionInfo.category = $scope.missionCtrl.missionLoop.type;
         }
         $modalInstance.close({
             mission: $scope.missionCtrl.missionInfo,
