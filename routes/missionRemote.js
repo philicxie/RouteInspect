@@ -51,40 +51,35 @@ router.post('/getAllFacility', function(req, res, next) {
 });
 
 router.post('/createMission', function(req, res, next) {
-    // var mission = new Mission({uid: 1000});
+    // var mission = new RollMission({uid: 1000});
     // mission.save();
     // res.send(200);
     var sortDoc = function(a, b) {
         return a.uid < b.uid;
     };
-    
-    Mission.find(function(err, doc) {
-        if(err) {
-            res.send({code: 300});
-            return console.error(err);
-        } else {
-            doc.sort(sortDoc);
-            var initId = doc[0].uid * 1 + 1;
-            console.log(initId);
-            var initMission = new Mission({
-                uid: initId,
-                status: 0
-            });
-            initMission.save();
-            res.send({code: 200, uid: initId});
-        }
-    });
-});
-
-router.post('/dismissMission', function(req, res, next) {
-    Mission.remove({uid: req.body.uid}, function(err, doc){
-        if(err) {
-            res.send({code: 300});
-            return console.error(err);
-        }
-        console.log(doc);
-        res.send({code: 200});
-    })
+    if(req.body.category === 'SINGLE') {
+        SingleMission.find(function(err, doc) {
+            if(err) {
+                res.send({code: 300});
+                return console.error(err);
+            } else {
+                doc.sort(sortDoc);
+                res.send({code: 200, uid: doc[0].uid*1+1});
+            }
+        });
+    } else if(req.body.category === 'ROLL') {
+        RollMission.find(function(err, doc) {
+            if(err) {
+                res.send({code: 300});
+                return console.error(err);
+            } else {
+                doc.sort(sortDoc);
+                res.send({code: 200, uid: doc[0].uid*1+1});
+            }
+        });
+    } else {
+        res.send({code: 301});
+    }
 });
 
 router.post('/commitMission', function(req, res, next) {
@@ -122,14 +117,13 @@ router.post('/getAllMissionIntros', function(req, res, next) {
             console.log(doc);
             doc.map(function(mission) {
                 res.Arr.push({
-                    status: mission.status,
-                    uid: 
-                })
-            })
+                    status: mission.status
+                });
+            });
             res.send({code: 200});
         }
-    })
-})
+    });
+});
 
 
 
