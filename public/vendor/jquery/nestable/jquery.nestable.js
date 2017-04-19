@@ -258,12 +258,17 @@
             mouse.offsetX = e.pageX - initLeft;
             mouse.offsetY = e.pageY - initTop;
 
+
+
             this.placeEl.css('height', dragItem.height());
 
             this.dragRootEl = this.el;
 
             this.dragEl = $(document.createElement(this.options.listNodeName)).addClass(this.options.listClass + ' ' + this.options.dragClass);
             this.dragEl.css('width', dragItem.width());
+            //this.dragEl.css('color', dragItem.colo);
+            console.log(dragItem);
+            console.log(this.dragEl[0]);
 
             // fix for zepto.js
             //dragItem.after(this.placeEl).detach().appendTo(this.dragEl);
