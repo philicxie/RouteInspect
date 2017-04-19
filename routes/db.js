@@ -37,7 +37,7 @@ var rollMissionSchema = mongoose.Schema({
     index       :       Number,
     uid         :       String,
     facility    :       [String],
-    category    :       Number,
+    category    :       [String],
     dates       :       [Number],
     abstract    :       String
 });

@@ -17,14 +17,14 @@
                     <div class="col-sm-9">
                         <div class="radio">
                             <label class="i-checks i-checks-md" ng-click="changeCateToSingle()">
-                                <input type="radio" name="missionCate" value="SINGLE" ng-model="missionCtrl.missionInfo.category">
+                                <input type="radio" name="missionCate" value="SINGLE" ng-model="missionCtrl.category">
                                 <i></i>
                                 单次任务
                             </label>
                         </div>
                         <div class="radio">
                             <label class="i-checks i-checks-md" ng-click="changeCateToRoll()">
-                                <input type="radio" name="missionCate" value="ROLL" ng-model="missionCtrl.missionInfo.category">
+                                <input type="radio" name="missionCate" value="ROLL" ng-model="missionCtrl.category">
                                 <i></i>
                                 循环任务
                             </label>
@@ -40,8 +40,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="line line-dashed b-a line-lg pull-none" ng-if="missionCtrl.missionInfo.category=='SINGLE'"></div>
-                <div class="form-group" ng-if="missionCtrl.missionInfo.category=='SINGLE'">
+                <div class="line line-dashed b-a line-lg pull-none" ng-if="missionCtrl.category=='SINGLE'"></div>
+                <div class="form-group" ng-if="missionCtrl.category=='SINGLE'">
                     <label class="col-sm-3 control-label">负责人</label>
                     <div class="col-sm-9">
                         <select ui-jq="chosen" class="w-full" ng-model="missionCtrl.missionInfo.manager">
@@ -49,7 +49,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group" ng-if="missionCtrl.missionInfo.category=='SINGLE'">
+                <div class="form-group" ng-if="missionCtrl.category=='SINGLE'">
                     <label class="col-sm-3 control-label">执行人</label>
                     <div class="col-sm-9">
                         <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.missionInfo.worker">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="line line-dashed b-a line-lg pull-none"></div>
-                <div class="form-group" ng-if="missionCtrl.missionInfo.category=='SINGLE'">
+                <div class="form-group" ng-if="missionCtrl.category=='SINGLE'">
                     <label class="col-sm-3 control-label">日期</label>
                     <div class="col-sm-9">
                         <p class="input-group">
@@ -80,21 +80,21 @@
                         </p>
                     </div>
                 </div>
-                <div class="form-group" ng-show="missionCtrl.missionInfo.category==='ROLL'">
+                <div class="form-group" ng-show="missionCtrl.category==='ROLL'">
                     <label class="col-sm-3 control-label">重复</label>
                     <div class="col-sm-9">
                         <label class="checkbox-inline i-checks">
-                            <input type="radio" name="missionLoop" value="Day" ng-model="missionCtrl.missionLoop.type"><i></i> 每天
+                            <input type="radio" name="missionLoop" value="DAY" ng-model="missionCtrl.missionLoop.type"><i></i> 每天
                         </label>
                         <label class="checkbox-inline i-checks">
-                            <input type="radio" name="missionLoop" value="Week" ng-model="missionCtrl.missionLoop.type"><i></i> 每周
+                            <input type="radio" name="missionLoop" value="WEEK" ng-model="missionCtrl.missionLoop.type"><i></i> 每周
                         </label>
                         <label class="checkbox-inline i-checks">
-                            <input type="radio" name="missionLoop" value="Month" ng-model="missionCtrl.missionLoop.type"><i></i> 每月
+                            <input type="radio" name="missionLoop" value="MONTH" ng-model="missionCtrl.missionLoop.type"><i></i> 每月
                         </label>
                     </div>
                 </div>
-                <div class="form-group" ng-show="missionCtrl.missionLoop.type=='Week'">
+                <div class="form-group" ng-show="missionCtrl.missionLoop.type=='WEEK' && missionCtrl.category == 'ROLL'">
                     <label class="col-sm-3 control-label"></label>
                     <div class="col-sm-9">
                         <div class="btn-group">
@@ -114,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group" ng-if="missionCtrl.missionLoop.type=='Month'">
+                <div class="form-group" ng-if="missionCtrl.missionLoop.type=='MONTH' && missionCtrl.category == 'ROLL'">
                     <label class="col-sm-3 control-label"></label>
                     <div class="col-sm-9">
                         <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.missionLoop.month.val" data-placeholder="对于不足31天的月份, 31日将转为当月最后一天">

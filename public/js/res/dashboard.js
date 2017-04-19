@@ -39,17 +39,7 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
     });
 
     $scope.addMission = function() {
-        $scope.missionInfo = {
-            uid: "",
-            facility: [],
-            manager: '',
-            worders: [],
-            category: '',
-            status: '',
-            abstract: '',
-            date: '',
-            time: ''
-        };
+        $scope.missionInfo = {};
         var addMissionModalInstance = $modal.open({
             templateUrl: 'MissionInfo',
             controller: 'MissionInfoModalCtrl',
@@ -57,11 +47,37 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
             resolve: {
                 missionInfo: function () {
                     return $scope.missionInfo;
+                },
+                category: function () {
+                    return 'SINGLE';
                 }
             }
         });
         addMissionModalInstance.result.then(function (resMission) {
             console.log(resMission);
+            var reqMission = {};
+            reqMission.category = resMission.category;
+            reqMission.mission = {
+                index: resMission.mission.index,
+                uid: resMission.mission.uid,
+                facility: resMission.mission.facility,
+                abstract: resMission.mission.abstract
+            };
+            if(resCategory === 'SINGLE') {
+
+            } else {
+                reqMission.mission.category = resMission.mission.category;
+                reqMission.dates = resMission.mission.dates;
+            }
+            console.log(reqMission);
+            $http({
+                method: 'POST',
+                url: '/mission/commitMission',
+                data: reqMission
+            }).then(function success(res) {
+                console.log(res);
+                //$state.reload();
+            });
         }, function(){
             console.log('dismissed');
         });
@@ -79,14 +95,14 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
 }]);
 
 
-app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'missionInfo', '$http', function($scope, $modalInstance, missionInfo, $http) {
+app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'missionInfo', 'category', '$http', function($scope, $modalInstance, missionInfo, category, $http) {
     console.log('mission modal loaded');
     $scope.missionCtrl = $scope;
     $scope.missionCtrl.dayVals = ['周日','周一','周二','周三','周四','周五','周六'];
     $scope.missionCtrl.initUid = '';
     $scope.missionCtrl.facility = "";
     $scope.missionCtrl.missionInfo = missionInfo;
-    $scope.missionCtrl.missionInfo.category = 'SINGLE';
+    $scope.missionCtrl.category = 'SINGLE';
     $scope.missionCtrl.missionLoop = {};
     $scope.missionCtrl.missionLoop.month = {};
     $scope.missionCtrl.missionLoop.month.days = [];
@@ -103,12 +119,20 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'missionInfo
     $http({
         method: 'POST',
         url: '/mission/createMission',
-        data: {}
+        data: {category: "SINGLE"}
     }).then(function success(res){
-        $scope.missionCtrl.initUid = res.data.uid;
-        $scope.missionCtrl.missionInfo.uid = 'MS-S-' + $scope.missionCtrl.initUid;
+        $scope.missionCtrl.singleIndex = res.data.index;
+        $scope.missionCtrl.singleUid = 'MS-S-' + res.data.index;
+        $scope.missionCtrl.missionInfo.uid = $scope.missionCtrl.singleUid;
+    }).then($http({
+        method: 'POST',
+        url: "/mission/createMission",
+        data: {category: "ROLL"}
+    }).then(function success(res){
+        $scope.missionCtrl.rollIndex = res.data.index;
+        $scope.missionCtrl.rollUid = 'MS-R-' + res.data.index;
+    }));
 
-    });
     $scope.missionCtrl.env = {};
     $http({
         method: 'POST',
@@ -141,7 +165,31 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'missionInfo
         console.log('mission info modal closed');
         console.log($scope.missionCtrl.missionInfo);
         console.log($scope.missionCtrl.missionLoop);
-        //$modalInstance.close($scope.missionCtrl.missionInfo);
+        if($scope.missionCtrl.category === 'ROLL') {
+            var dates = [];
+            switch($scope.missionCtrl.missionLoop.type) {
+                case 'DAY':
+                    break;
+                case 'WEEK':
+                    $scope.missionCtrl.missionLoop.days.map(function(day) {
+                        if(day.chosen) {
+                            console.log(day.value);
+                            dates.push(day.value);
+                        }
+                    });
+                    break;
+                case 'MONTH':
+                    dates = $scope.missionCtrl.missionLoop.month.days;
+                    break;
+                default:
+                    break;
+            }
+            $scope.missionCtrl.missionInfo.dates = dates;
+        }
+        $modalInstance.close({
+            mission: $scope.missionCtrl.missionInfo,
+            category: $scope.missionCtrl.category
+        });
     };
 
     $scope.cancel = function() {
@@ -177,13 +225,15 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'missionInfo
 
     $scope.changeCateToSingle = function() {
         if($scope.missionCtrl.missionInfo) {
-            $scope.missionCtrl.missionInfo.uid = 'MS-S-'+$scope.missionCtrl.initUid;
+            $scope.missionCtrl.missionInfo.index = $scope.missionCtrl.singleIndex;
+            $scope.missionCtrl.missionInfo.uid = $scope.missionCtrl.singleUid;
         }
     };
 
     $scope.changeCateToRoll = function() {
         if($scope.missionCtrl.missionInfo) {
-            $scope.missionCtrl.missionInfo.uid = 'MS-R-'+$scope.missionCtrl.initUid;
+            $scope.missionCtrl.missionInfo.index = $scope.missionCtrl.rollIndex;
+            $scope.missionCtrl.missionInfo.uid = $scope.missionCtrl.rollUid;
         }
     };
 }]);

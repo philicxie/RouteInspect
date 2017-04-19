@@ -84,27 +84,29 @@ router.post('/createMission', function(req, res, next) {
 
 router.post('/commitMission', function(req, res, next) {
     console.log(req.body);
-    Mission.find({uid: req.body.uid}, function(err, doc){
-        if(err) {
-            res.send({code: 300});
-            return console.err(error);
-        }
-        console.log(doc);
-        doc[0].facility =   req.body.facility;
-        doc[0].status =     req.body.status;
-        doc[0].date =       req.body.date;
-        doc[0].manager =    req.body.manager;
-        doc[0].worker =     req.body.worker;
-        doc[0].abstract =   req.body.abstract;
-        
-        doc[0].save(function(err, doc){
+    if(req.body.category === 'SINGLE') {
+        var initSingleMission = new SingleMission(req.body.mission);
+        initSingleMission.save(function(err, doc) {
             if(err) {
                 res.send({code: 301});
-                return console.err(error);
+                return console.error(err);
+            } else {
+                res.send({code: 200});
             }
-            res.send({code: 200});
         });
-    });
+    } else if(req.body.category === 'ROLL') {
+        var initRollMission = new RollMission(req.body.mission);
+        initRollMission.save(function(err, doc) {
+            if(err) {
+                res.send({code: 301});
+                return console.error(err);
+            } else {
+                res.send({code: 200});
+            }
+        });
+    } else {
+        res.send({code: 300});
+    }
 });
 
 router.post('/getAllMissionIntros', function(req, res, next) {
