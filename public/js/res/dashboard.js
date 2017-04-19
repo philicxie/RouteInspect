@@ -14,11 +14,11 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
 
     $http({
         method: 'post',
-        url: 'getAllMissionIntros',
+        url: '/mission/getAllMissionIntros',
         data: {}
     }).then(function success(res) {
         console.log(res);
-        res.data.map(function(mission) {
+        res.data.missions.map(function(mission) {
             switch(mission.status) {
                 case 'PLANNING':
                     $scope.planningMission.push(mission);

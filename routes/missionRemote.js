@@ -110,7 +110,8 @@ router.post('/commitMission', function(req, res, next) {
 });
 
 router.post('/getAllMissionIntros', function(req, res, next) {
-    Mission.find(function(err, doc) {
+    var weekDic = ['周日','周一','周二','周三','周四','周五','周六'];
+    RollMission.find(function(err, doc) {
         if(err) {
             res.send({code: 300});
             return console.error(err);
@@ -118,11 +119,35 @@ router.post('/getAllMissionIntros', function(req, res, next) {
             var resArr = [];
             console.log(doc);
             doc.map(function(mission) {
-                res.Arr.push({
-                    status: mission.status
+                var date = '';
+                switch (mission.category) {
+                    case 'DAY':
+                        date = '每天';
+                        break;
+                    case 'WEEK':
+                        date = '每' + weekDic[mission.dates[0]];
+                        for(var i=1;i<mission.dates.length;i++) {
+                            date += ', ' + weekDic[mission.dates[i]];
+                        }
+                        break;
+                    case 'MONTH':
+                        date = '每月' + (mission.dates[0]+1) + '日';
+                        for(var i=1;i<mission.dates.length;i++) {
+                            date += ', ' + (mission.dates[i]+1) + '日';
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                resArr.push({
+                    status: 'PLANNING',
+                    uid: mission.uid,
+                    date: date,
+                    category: 'ROLL',
+                    facility: 'TO DO'
                 });
             });
-            res.send({code: 200});
+            res.send({code: 200, missions: resArr});
         }
     });
 });
