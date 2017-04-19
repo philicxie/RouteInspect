@@ -21,17 +21,25 @@ var facilitySchema = mongoose.Schema({
     category    :       String
 });
 
-var missionSchema = mongoose.Schema({
+var singleMissionSchema = mongoose.Schema({
+    index       :       Number,
     uid         :       String,
     facility    :       [String],
     status      :       String,
-    category    :       String,
     date        :       Date,
-    times       :       [Number],
     manager     :       String,
     worker      :       [String],
     abstract    :       String,
     notes       :       [String]
+});
+
+var rollMissionSchema = mongoose.Schema({
+    index       :       Number,
+    uid         :       String,
+    facility    :       [String],
+    category    :       Number,
+    dates       :       [Number],
+    abstract    :       String
 });
 
 var notificationSchema = mongoose.Schema({
@@ -46,6 +54,8 @@ module.exports.user             = mongoose.model('Users',           userSchema  
 
 module.exports.facility         = mongoose.model('Facilities',      facilitySchema      );
 
-module.exports.mission          = mongoose.model('Missions',        missionSchema       );
+module.exports.singleMission    = mongoose.model('SingleMissions',  singleMissionSchema );
+
+module.exports.rollMission      = mongoose.model('RollMissions',    rollMissionSchema   );
 
 module.exports.notification     = mongoose.model('Notifications',   notificationSchema  );

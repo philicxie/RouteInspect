@@ -14,7 +14,7 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
 
     $http({
         method: 'post',
-        url: 'getAllMissions',
+        url: 'getAllMissionIntros',
         data: {}
     }).then(function success(res) {
         console.log(res);
@@ -69,7 +69,7 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
         }, function(){
             console.log('dismissed');
         });
-    }
+    };
 
 
     $scope.itemClick = function(e) {

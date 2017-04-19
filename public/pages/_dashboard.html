@@ -25,18 +25,19 @@
                             计划任务
                         </div>
                         <div ui-jq="nestable" class="dd dd-plan" id="Planning" >
-                            <li class="dd-item" data-id="1" ng-mousedown="itemClick2($event)" ng-click="itemClick($event)">
-                                <div class="dd-handle" >
+                            <li class="dd-item" data-id="1" ng-mousedown="itemClick2($event)" ng-click="itemClick($event)" ng-repeat="mission in planningMission">
+                                <div class="dd-handle">
                                     <div class="row">
                                         <div class="col-lg-3 text-center">
-                                            <i class="fa fa-history fa-5x dd-title" style="margin-top:40px; margin-left:10px;" title="an icon"></i>
+                                            <i class="fa fa-history fa-5x dd-title" style="margin-top:40px; margin-left:10px;" title="循环任务" ng-show="mission.isRoll"></i>
+                                            <i class="fa fa-history fa-5x dd-title" style="margin-top:40px; margin-left:10px;" title="单次任务" ng-show="mission.isSingle"></i>
                                         </div>
                                         <div class="col-lg-9 wrapper-sm">
-                                            <div class="dd-title text-3x"><i class="glyphicon glyphicon-edit text-lg"></i> MS-S-1010</div>
-                                            <div class="line line-lg pull-none" style="width: 70%;"></div>
-                                            <div class="text-md dd-title"><i class="glyphicon glyphicon-map-marker"></i> &nbsp&nbspfewfewfe</div>
-                                            <div class="line line-lg pull-none " style="width: 70%;"></div>
-                                            <div class="text-md dd-title"><i class="fa fa-calendar"></i> &nbsp&nbsp2017-5-24</div>
+                                            <div class="dd-title text-3x"><i class="glyphicon glyphicon-edit text-lg"></i> {{mission.uid}}</div>
+                                            <div class="line line-lg pull-none" style="width: 80%;"></div>
+                                            <div class="text-md dd-title"><i class="glyphicon glyphicon-map-marker"></i> &nbsp&nbsp{{mission.info}}</div>
+                                            <div class="line line-lg pull-none " style="width: 80%;"></div>
+                                            <div class="text-md dd-title"><i class="fa fa-calendar"></i> &nbsp&nbsp{{mission.date}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -49,57 +50,9 @@
                                         </div>
                                         <div class="col-lg-9 wrapper-sm">
                                             <div class="dd-title text-3x"><i class="glyphicon glyphicon-edit text-lg"></i> MS-S-1010</div>
-                                            <div class="line b-a line-lg pull-none" style="width: 70%;"></div>
+                                            <div class="line line-lg pull-none" style="width: 80%;"></div>
                                             <div class="text-md dd-title"><i class="glyphicon glyphicon-map-marker"></i> &nbsp&nbspfewfewfe</div>
-                                            <div class="line b-a line-lg pull-none " style="width: 70%;"></div>
-                                            <div class="text-md dd-title"><i class="fa fa-calendar"></i> &nbsp&nbsp2017-5-24</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="dd-item" data-id="1" ng-mousedown="itemClick2($event)" ng-click="itemClick($event)">
-                                <div class="dd-handle" >
-                                    <div class="row">
-                                        <div class="col-lg-3 text-center">
-                                            <i class="fa fa-history fa-5x dd-title" style="margin-top:40px; margin-left:10px;" title="an icon"></i>
-                                        </div>
-                                        <div class="col-lg-9 wrapper-sm">
-                                            <div class="dd-title text-3x"><i class="glyphicon glyphicon-edit text-lg"></i> MS-S-1010</div>
-                                            <div class="line b-a line-lg pull-none" style="width: 70%;"></div>
-                                            <div class="text-md dd-title"><i class="glyphicon glyphicon-map-marker"></i> &nbsp&nbspfewfewfe</div>
-                                            <div class="line b-a line-lg pull-none " style="width: 70%;"></div>
-                                            <div class="text-md dd-title"><i class="fa fa-calendar"></i> &nbsp&nbsp2017-5-24</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="dd-item" data-id="1" ng-mousedown="itemClick2($event)" ng-click="itemClick($event)">
-                                <div class="dd-handle" >
-                                    <div class="row">
-                                        <div class="col-lg-3 text-center">
-                                            <i class="fa fa-history fa-5x dd-title" style="margin-top:40px; margin-left:10px;" title="an icon"></i>
-                                        </div>
-                                        <div class="col-lg-9 wrapper-sm">
-                                            <div class="dd-title text-3x"><i class="glyphicon glyphicon-edit text-lg"></i> MS-S-1010</div>
-                                            <div class="line b-a line-lg pull-none" style="width: 70%;"></div>
-                                            <div class="text-md dd-title"><i class="glyphicon glyphicon-map-marker"></i> &nbsp&nbspfewfewfe</div>
-                                            <div class="line b-a line-lg pull-none " style="width: 70%;"></div>
-                                            <div class="text-md dd-title"><i class="fa fa-calendar"></i> &nbsp&nbsp2017-5-24</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="dd-item" data-id="1" ng-mousedown="itemClick2($event)" ng-click="itemClick($event)">
-                                <div class="dd-handle" >
-                                    <div class="row">
-                                        <div class="col-lg-3 text-center">
-                                            <i class="fa fa-history fa-5x dd-title" style="margin-top:40px; margin-left:10px;" title="an icon"></i>
-                                        </div>
-                                        <div class="col-lg-9 wrapper-sm">
-                                            <div class="dd-title text-3x"><i class="glyphicon glyphicon-edit text-lg"></i> MS-S-1010</div>
-                                            <div class="line line-lg pull-none" style="width: 70%;"></div>
-                                            <div class="text-md dd-title"><i class="glyphicon glyphicon-map-marker"></i> &nbsp&nbspfewfewfe</div>
-                                            <div class="line line-lg pull-none " style="width: 70%;"></div>
+                                            <div class="line line-lg pull-none " style="width: 80%;"></div>
                                             <div class="text-md dd-title"><i class="fa fa-calendar"></i> &nbsp&nbsp2017-5-24</div>
                                         </div>
                                     </div>

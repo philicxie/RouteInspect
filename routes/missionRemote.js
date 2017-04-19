@@ -4,12 +4,11 @@
 
 var User = require('../routes/db').user;
 var Facility = require('../routes/db').facility;
-var Mission = require('../routes/db').mission;
+var SingleMission = require('../routes/db').singleMission;
+var RollMission = require('../routes/db').rollMission;
 var express = require('express');
 var router = express.Router();
 
-var temMission = new Mission({uid: 1000});
-temMission.save();
 
 router.post('/getAllUsers', function(req, res, next) {
     User.find(function(err, doc) {
@@ -112,6 +111,25 @@ router.post('/commitMission', function(req, res, next) {
         });
     });
 });
+
+router.post('/getAllMissionIntros', function(req, res, next) {
+    Mission.find(function(err, doc) {
+        if(err) {
+            res.send({code: 300});
+            return console.error(err);
+        } else {
+            var resArr = [];
+            console.log(doc);
+            doc.map(function(mission) {
+                res.Arr.push({
+                    status: mission.status,
+                    uid: 
+                })
+            })
+            res.send({code: 200});
+        }
+    })
+})
 
 
 
