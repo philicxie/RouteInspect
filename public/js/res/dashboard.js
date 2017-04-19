@@ -55,9 +55,6 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
             controller: 'MissionInfoModalCtrl',
             size: 'lg',
             resolve: {
-                isNew: function () {
-                    return true;
-                },
                 missionInfo: function () {
                     return $scope.missionInfo;
                 }
@@ -65,7 +62,6 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
         });
         addMissionModalInstance.result.then(function (resMission) {
             console.log(resMission);
-
         }, function(){
             console.log('dismissed');
         });
@@ -83,15 +79,14 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
 }]);
 
 
-app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'missionInfo', '$http', function($scope, $modalInstance, isNew, missionInfo, $http) {
+app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'missionInfo', '$http', function($scope, $modalInstance, missionInfo, $http) {
     console.log('mission modal loaded');
     $scope.missionCtrl = $scope;
     $scope.missionCtrl.dayVals = ['周日','周一','周二','周三','周四','周五','周六'];
     $scope.missionCtrl.initUid = '';
     $scope.missionCtrl.facility = "";
-    $scope.missionCtrl.isNew = isNew;
     $scope.missionCtrl.missionInfo = missionInfo;
-    $scope.missionCtrl.missionInfo.category = 0;
+    $scope.missionCtrl.missionInfo.category = 'SINGLE';
     $scope.missionCtrl.missionLoop = {};
     $scope.missionCtrl.missionLoop.month = {};
     $scope.missionCtrl.missionLoop.month.days = [];
@@ -151,15 +146,7 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'isNew', 'mi
 
     $scope.cancel = function() {
         console.log('modal cancel clicked');
-        $http({
-            method: 'POST',
-
-            
-            data: {uid: $scope.initUid}
-        }).then(function success(res){
-            console.log(res);
-            $modalInstance.dismiss('cancel');
-        });
+        $modalInstance.dismiss('cancel');
     };
 
     $scope.today = function() {

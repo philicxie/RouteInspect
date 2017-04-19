@@ -17,14 +17,14 @@
                     <div class="col-sm-9">
                         <div class="radio">
                             <label class="i-checks i-checks-md" ng-click="changeCateToSingle()">
-                                <input type="radio" name="missionCate" value="0" ng-model="missionCtrl.missionInfo.category" >
+                                <input type="radio" name="missionCate" value="SINGLE" ng-model="missionCtrl.missionInfo.category">
                                 <i></i>
                                 单次任务
                             </label>
                         </div>
                         <div class="radio">
                             <label class="i-checks i-checks-md" ng-click="changeCateToRoll()">
-                                <input type="radio" name="missionCate" value="1" ng-model="missionCtrl.missionInfo.category">
+                                <input type="radio" name="missionCate" value="ROLL" ng-model="missionCtrl.missionInfo.category">
                                 <i></i>
                                 循环任务
                             </label>
@@ -40,8 +40,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="line line-dashed b-a line-lg pull-none"></div>
-                <div class="form-group">
+                <div class="line line-dashed b-a line-lg pull-none" ng-if="missionCtrl.missionInfo.category=='SINGLE'"></div>
+                <div class="form-group" ng-if="missionCtrl.missionInfo.category=='SINGLE'">
                     <label class="col-sm-3 control-label">负责人</label>
                     <div class="col-sm-9">
                         <select ui-jq="chosen" class="w-full" ng-model="missionCtrl.missionInfo.manager">
@@ -49,7 +49,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" ng-if="missionCtrl.missionInfo.category=='SINGLE'">
                     <label class="col-sm-3 control-label">执行人</label>
                     <div class="col-sm-9">
                         <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.missionInfo.worker">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="line line-dashed b-a line-lg pull-none"></div>
-                <div class="form-group" ng-show="missionCtrl.missionInfo.category=='0'">
+                <div class="form-group" ng-if="missionCtrl.missionInfo.category=='SINGLE'">
                     <label class="col-sm-3 control-label">日期</label>
                     <div class="col-sm-9">
                         <p class="input-group">
@@ -80,7 +80,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="form-group" ng-show="missionCtrl.missionInfo.category=='1'">
+                <div class="form-group" ng-show="missionCtrl.missionInfo.category==='ROLL'">
                     <label class="col-sm-3 control-label">重复</label>
                     <div class="col-sm-9">
                         <label class="checkbox-inline i-checks">

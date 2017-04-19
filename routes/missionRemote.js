@@ -55,7 +55,7 @@ router.post('/createMission', function(req, res, next) {
     // mission.save();
     // res.send(200);
     var sortDoc = function(a, b) {
-        return a.uid < b.uid;
+        return a.index < b.index;
     };
     if(req.body.category === 'SINGLE') {
         SingleMission.find(function(err, doc) {
@@ -64,7 +64,7 @@ router.post('/createMission', function(req, res, next) {
                 return console.error(err);
             } else {
                 doc.sort(sortDoc);
-                res.send({code: 200, uid: doc[0].uid*1+1});
+                res.send({code: 200, index: doc[0].index*1+1});
             }
         });
     } else if(req.body.category === 'ROLL') {
@@ -74,7 +74,7 @@ router.post('/createMission', function(req, res, next) {
                 return console.error(err);
             } else {
                 doc.sort(sortDoc);
-                res.send({code: 200, uid: doc[0].uid*1+1});
+                res.send({code: 200, index: doc[0].index*1+1});
             }
         });
     } else {
