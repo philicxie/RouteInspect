@@ -253,9 +253,10 @@
                 target   = $(e.target),
                 dragItem = target.closest(this.options.itemNodeName);
 
-            var initLeft = dragItem[0].getBoundingClientRect().left;
-            var initTop  = dragItem[0].getBoundingClientRect().top;
-
+            var initLeft = dragItem[0].getBoundingClientRect().left + 5;
+            var initTop  = dragItem[0].getBoundingClientRect().top + 5;
+            mouse.offsetX = e.pageX - initLeft;
+            mouse.offsetY = e.pageY - initTop;
 
             this.placeEl.css('height', dragItem.height());
 
@@ -272,8 +273,8 @@
 
             $(document.body).append(this.dragEl);
             this.dragEl.css({
-                'left' : initLeft+5,
-                'top'  : initTop+5
+                'left' : initLeft,
+                'top'  : initTop
             });
             // total depth of dragging item
             var i, depth,
