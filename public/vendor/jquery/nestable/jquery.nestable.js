@@ -253,12 +253,11 @@
                 target   = $(e.target),
                 dragItem = target.closest(this.options.itemNodeName);
 
-            this.placeEl.css('height', dragItem.height());
+            var initLeft = dragItem[0].getBoundingClientRect().left;
+            var initTop  = dragItem[0].getBoundingClientRect().top;
 
-            mouse.offsetX = e.offsetX !== undefined ? e.offsetX : e.pageX - target.offset().left;
-            mouse.offsetY = e.offsetY !== undefined ? e.offsetY : e.pageY - target.offset().top;
-            mouse.startX = mouse.lastX = e.pageX;
-            mouse.startY = mouse.lastY = e.pageY;
+
+            this.placeEl.css('height', dragItem.height());
 
             this.dragRootEl = this.el;
 
@@ -273,8 +272,8 @@
 
             $(document.body).append(this.dragEl);
             this.dragEl.css({
-                'left' : e.pageX - mouse.offsetX,
-                'top'  : e.pageY - mouse.offsetY
+                'left' : initLeft+5,
+                'top'  : initTop+5
             });
             // total depth of dragging item
             var i, depth,
@@ -291,31 +290,16 @@
         {
             // fix for zepto.js
             //this.placeEl.replaceWith(this.dragEl.children(this.options.itemNodeName + ':first').detach());
-
             var el = this.dragEl.children(this.options.itemNodeName).first();
-            //console.log(el[0]);
             !(el[0].click)();
-
-
-            //console.log(this.el[0].id);
-
             el[0].parentNode.removeChild(el[0]);
             this.placeEl.replaceWith(el);
-
-            //console.log(el[0].parentNode.parentNode.id);
-            //console.log(this.el[0].id);
-
-
-
             this.dragEl.remove();
             this.el.trigger('change');
             if (this.hasNewRoot) {
                 this.dragRootEl.trigger('change');
             }
-
             this.reset();
-
-
         },
 
         dragMove: function(e)
