@@ -255,45 +255,46 @@
                 target   = $(e.target),
                 dragItem = target.closest(this.options.itemNodeName);
 
-            console.log(dragItem);
+            console.log(dragItem[0]);
+            console.log(dragItem[0].classList[1]);
             var initLeft = dragItem[0].getBoundingClientRect().left + 5;
             var initTop  = dragItem[0].getBoundingClientRect().top + 5;
             mouse.offsetX = e.pageX - initLeft;
             mouse.offsetY = e.pageY - initTop;
 
 
-            console.log(this.placeEl[0]);
-            this.placeEl.css('height', dragItem.height());
 
-            this.dragRootEl = this.el;
+            if($.inArray('dd-stable', dragItem[0].classList) !== -1) {
 
-            console.log(this.dragEl);
-            this.dragEl = $(document.createElement(this.options.listNodeName)).addClass(this.options.listClass + ' ' + this.options.dragClass);
-            console.log(this.dragEl);
-            this.dragEl.css('width', dragItem.width());
+            } else {
+                console.log('drag a normal')
+                this.placeEl.css('height', dragItem.height());
+                this.dragRootEl = this.el;
+                this.dragEl = $(document.createElement(this.options.listNodeName)).addClass(this.options.listClass + ' ' + this.options.dragClass);
+                this.dragEl.css('width', dragItem.width());
+                dragItem.after(this.placeEl);
+                dragItem[0].parentNode.removeChild(dragItem[0]);
+                dragItem.appendTo(this.dragEl);
+            }
 
-            console.log(dragItem);
+
             // console.log(dragItem);
-            // console.log(this.dragEl[0]);
-
-            // fix for zepto.js
-            //dragItem.after(this.placeEl).detach().appendTo(this.dragEl);
-
-            //dragItem.after(this.placeEl);
-            console.log(dragItem[0].parentNode.classList[1]);
-            //this.dragEl.addClass(dragItem[0].parentNode.classList[1]);
-            //this.placeEl.addClass(dragItem[0].parentNode.classList[1]);
-            console.log(dragItem[0].parentNode);
-            //dragItem[0].parentNode.removeChild(dragItem[0]);
-            var temParent = dragItem[0].parentNode;
-            //dragItem.after(temParent);
+            // // console.log(dragItem);
+            // // console.log(this.dragEl[0]);
+            //
+            // // fix for zepto.js
+            // //dragItem.after(this.placeEl).detach().appendTo(this.dragEl);
+            //
+            // console.log(dragItem[0].parentNode.classList[1]);
+            // //this.dragEl.addClass(dragItem[0].parentNode.classList[1]);
+            // //this.placeEl.addClass(dragItem[0].parentNode.classList[1]);
+            // console.log(dragItem[0].parentNode);
+            // var temParent = dragItem[0].parentNode;
+            // var temItem = dragItem;
+            // temItem.appendTo(this.dragEl);
 
             //dragItem.appendTo(this.dragEl);
-
-
             console.log(dragItem[0].parentNode);
-
-
 
             $(document.body).append(this.dragEl);
             this.dragEl.css({
@@ -316,8 +317,8 @@
             // fix for zepto.js
             //this.placeEl.replaceWith(this.dragEl.children(this.options.itemNodeName + ':first').detach());
             var el = this.dragEl.children(this.options.itemNodeName).first();
-            !(el[0].click)();
-            el[0].parentNode.removeChild(el[0]);
+            //!(el[0].click)();
+            //el[0].parentNode.removeChild(el[0]);
             this.placeEl.replaceWith(el);
             this.dragEl.remove();
             this.el.trigger('change');
