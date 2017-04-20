@@ -144,10 +144,27 @@ router.post('/getAllMissionIntros', function(req, res, next) {
                     uid: mission.uid,
                     date: date,
                     category: 'ROLL',
-                    facility: 'TO DO'
+                    facility: mission.facility.join(", ")
                 });
             });
-            res.send({code: 200, missions: resArr});
+            SingleMission.find(function(err, doc) {
+                if(err) {
+                    res.send({code: 300});
+                    return console.error(err);
+                } else {
+                    doc.map(function(mission) {
+                        resArr.push({
+                            status: mission.status,
+                            uid: mission.uid,
+                            date: mission.date,
+                            category: 'SINGLE',
+                            facility: mission.facility.join(", "),
+                            manager: mission.manager
+                        });
+                    });
+                }
+                res.send({code: 200, missions: resArr});
+            });
         }
     });
 });

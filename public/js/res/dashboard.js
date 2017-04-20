@@ -3,6 +3,13 @@
  */
 
 app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function( $http, $scope, $modal, $state){
+    $scope.convert = function(str) {
+        if(str && str.length >= 13) {
+            str = str.slice(0, 12);
+            str += '...';
+        }
+        return str;
+    };
     console.log($scope.user);
     $scope.startColumn = {};
     $scope.endColumn = {};
@@ -19,6 +26,9 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
     }).then(function success(res) {
         console.log(res);
         res.data.missions.map(function(mission) {
+            console.log(mission.facility);
+            mission.date = $scope.convert(mission.date);
+            mission.info = $scope.convert(mission.facility);
             switch(mission.status) {
                 case 'PLANNING':
                     $scope.planningMission.push(mission);
