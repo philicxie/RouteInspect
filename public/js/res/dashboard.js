@@ -24,9 +24,7 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
         url: '/mission/getAllMissionIntros',
         data: {}
     }).then(function success(res) {
-        console.log(res);
         res.data.missions.map(function(mission) {
-            console.log(mission.facility);
             mission.date = $scope.convert(mission.date);
             mission.info = $scope.convert(mission.facility);
             switch(mission.status) {

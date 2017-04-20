@@ -265,6 +265,14 @@
 
 
             if($.inArray('dd-stable', dragItem[0].classList) !== -1) {
+                this.dragEl = $(document.createElement(this.options.listNodeName)).addClass(this.options.listClass + ' ' + this.options.dragClass);
+                this.dragEl.css('width', dragItem.width());
+                //console.log(dragItem[0].parentNode);
+                //console.log(dragItem[0].innerHTML);
+                //dragItem.innerHTML.appendTo(this.dragEl);
+                console.log(this.dragEl[0]);
+                this.dragEl.append(dragItem[0].outerHTML);
+                console.log(this.dragEl[0]);
 
             } else {
                 console.log('drag a normal')
@@ -294,7 +302,7 @@
             // temItem.appendTo(this.dragEl);
 
             //dragItem.appendTo(this.dragEl);
-            console.log(dragItem[0].parentNode);
+            //console.log(dragItem[0].parentNode);
 
             $(document.body).append(this.dragEl);
             this.dragEl.css({
