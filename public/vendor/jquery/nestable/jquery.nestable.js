@@ -97,7 +97,9 @@
                     if (handle.closest('.' + list.options.noDragClass).length) {
                         return;
                     }
+                    //console.log(handle[0]);
                     handle = handle.closest('.' + list.options.handleClass);
+                    //console.log(handle[0]);
                 }
                 if (!handle.length || list.dragEl || (!hasTouch && e.button !== 0) || (hasTouch && e.touches.length !== 1)) {
                     return;
@@ -248,33 +250,50 @@
 
         dragStart: function(e)
         {
-
+            console.log('drag start -------------------------');
             var mouse    = this.mouse,
                 target   = $(e.target),
                 dragItem = target.closest(this.options.itemNodeName);
 
+            console.log(dragItem);
             var initLeft = dragItem[0].getBoundingClientRect().left + 5;
             var initTop  = dragItem[0].getBoundingClientRect().top + 5;
             mouse.offsetX = e.pageX - initLeft;
             mouse.offsetY = e.pageY - initTop;
 
 
-
+            console.log(this.placeEl[0]);
             this.placeEl.css('height', dragItem.height());
 
             this.dragRootEl = this.el;
 
+            console.log(this.dragEl);
             this.dragEl = $(document.createElement(this.options.listNodeName)).addClass(this.options.listClass + ' ' + this.options.dragClass);
+            console.log(this.dragEl);
             this.dragEl.css('width', dragItem.width());
-            //this.dragEl.css('color', dragItem.colo);
+
             console.log(dragItem);
-            console.log(this.dragEl[0]);
+            // console.log(dragItem);
+            // console.log(this.dragEl[0]);
 
             // fix for zepto.js
             //dragItem.after(this.placeEl).detach().appendTo(this.dragEl);
-            dragItem.after(this.placeEl);
-            dragItem[0].parentNode.removeChild(dragItem[0]);
-            dragItem.appendTo(this.dragEl);
+
+            //dragItem.after(this.placeEl);
+            console.log(dragItem[0].parentNode.classList[1]);
+            //this.dragEl.addClass(dragItem[0].parentNode.classList[1]);
+            //this.placeEl.addClass(dragItem[0].parentNode.classList[1]);
+            console.log(dragItem[0].parentNode);
+            //dragItem[0].parentNode.removeChild(dragItem[0]);
+            var temParent = dragItem[0].parentNode;
+            //dragItem.after(temParent);
+
+            //dragItem.appendTo(this.dragEl);
+
+
+            console.log(dragItem[0].parentNode);
+
+
 
             $(document.body).append(this.dragEl);
             this.dragEl.css({

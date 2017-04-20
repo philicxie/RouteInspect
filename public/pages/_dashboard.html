@@ -30,7 +30,7 @@
                                     <div class="row">
                                         <div class="col-lg-3 text-center">
                                             <i class="fa fa-history fa-5x dd-title" style="margin-top:40px; margin-left:10px;" title="循环任务" ng-if="mission.category == 'ROLL'"></i>
-                                            <i class="fa fa-history fa-5x dd-title" style="margin-top:40px; margin-left:10px;" title="单次任务" ng-show="mission.isSingle"></i>
+                                            <i class="fa fa-history fa-5x dd-title" style="margin-top:40px; margin-left:10px;" title="单次任务" ng-show="mission.category == 'SINGLE'"></i>
                                         </div>
                                         <div class="col-lg-9 wrapper-sm">
                                             <div class="dd-title text-3x"><i class="glyphicon glyphicon-edit text-lg"></i> {{mission.uid}}</div>

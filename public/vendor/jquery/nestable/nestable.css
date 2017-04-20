@@ -38,6 +38,7 @@
 }
 
 .dd-handle {
+    z-index: 1000;
     display: block;
     margin: 5px 5px;
     padding: 10px 10px; 

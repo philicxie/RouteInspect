@@ -178,7 +178,7 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'missionInfo
                     }
                     break;
                 case 'MONTH':
-                    dates = $scope.missionCtrl.missionLoop.month.days;
+                    dates = $scope.missionCtrl.missionLoop.month.val;
                     break;
                 default:
                     break;
