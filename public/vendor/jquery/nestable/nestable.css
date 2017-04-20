@@ -152,15 +152,13 @@
 .dd-dragel > .dd-item .dd-handle { margin-top: 0; }
 .dd-dragel .dd-handle {
     padding: 10px 10px;
-    background: #fff;
-    border: 2px solid #bbbbbb;
+    /*background: #fff;*/
+    /*border: 2px solid #bbbbbb;*/
     -webkit-box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);
             box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);
 }
 
-.dd-dragel .dd-handle .line {
-    border: 1px solid #bbbbbb;
-}
+
 
 /**
  * Nestable Extras
