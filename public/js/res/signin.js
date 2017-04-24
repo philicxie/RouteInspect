@@ -1,7 +1,7 @@
 'use strict';
 
 /* Controllers */
-app.controller('SigninFormController', ['$scope', '$http', '$state', '$rootScope', function($scope, $http, $state, $rootScope) {
+app.controller('SigninFormController', ['$scope', '$http', '$state', '$rootScope', '$localStorage', function($scope, $http, $state, $rootScope, $localStorage) {
     $rootScope.user = {};
     $rootScope.user.notes = [];
     $scope.authError = null;
@@ -17,6 +17,7 @@ app.controller('SigninFormController', ['$scope', '$http', '$state', '$rootScope
         }).then(function success(res) {
             if(res.data.code === 200) {
                 $rootScope.user = res.data.user;
+                $localStorage.user = res.data.user;
                 $http({
                     method: 'POST',
                     url: '/notification/getNotificationsOnUser',

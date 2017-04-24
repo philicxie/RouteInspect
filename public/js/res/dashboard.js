@@ -2,7 +2,7 @@
  * Created by philic on 2017/4/11.
  */
 
-app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function( $http, $scope, $modal, $state){
+app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', '$rootScope', function( $http, $scope, $modal, $state, $rootScope){
     $scope.convert = function(str) {
         if(str && str.length >= 13) {
             str = str.slice(0, 12);
@@ -10,7 +10,8 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
         }
         return str;
     };
-    console.log($scope.user);
+
+    $scope.user = $rootScope.user;
     $scope.startColumn = {};
     $scope.endColumn = {};
     $scope.targetMission = {};

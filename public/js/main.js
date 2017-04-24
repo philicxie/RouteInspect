@@ -9,8 +9,11 @@ angular.module('app')
             var isIE = !!navigator.userAgent.match(/MSIE/i);
             isIE && angular.element($window.document.body).addClass('ie');
             isSmartDevice($window) && angular.element($window.document.body).addClass('smart');
-            console.log('main program loaded');
-            console.log($scope.user);
+            if(!$scope.user) {
+                if($localStorage.user) {
+                    $scope.user = $localStorage.user;
+                }
+            }
             // config
             $scope.app = {
                 name: '巡检系统',
