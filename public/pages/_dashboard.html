@@ -25,7 +25,7 @@
                             计划任务
                         </div>
                         <div ui-jq="nestable" class="dd dd-plan" id="Planning" >
-                            <li class="dd-item dd-stable" data-id="1" ng-mousedown="itemClick2($event)" ng-click="itemClick($event)" ng-repeat="mission in planningMission">
+                            <li class="dd-item dd-stable" data-id="1" ng-mousedown="itemClick2($event, mission)" ng-click="itemClick($event, mission)" ng-repeat="mission in planningMission">
                                 <div class="dd-handle">
                                     <div class="row">
                                         <div class="col-lg-3 text-center">

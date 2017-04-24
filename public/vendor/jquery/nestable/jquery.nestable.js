@@ -276,7 +276,10 @@
                 dragItem.appendTo(this.dragEl);
             } else {
                 this.isStable = true;
-                this.dragEl.append(dragItem[0].outerHTML);
+                //this.dragEl.append(dragItem[0].outerHTML);
+                //dragItem[0].parentNode[0].append(dragItem[0].innerHTML);
+                this.dragEl.append(dragItem.clone(true));
+                //dragItem.appendTo(this.dragEl);
             }
 
 
@@ -302,6 +305,7 @@
             // fix for zepto.js
             //this.placeEl.replaceWith(this.dragEl.children(this.options.itemNodeName + ':first').detach());
             var el = this.dragEl.children(this.options.itemNodeName).first();
+            (el[0].click)();
             el[0].parentNode.removeChild(el[0]);
             this.placeEl.replaceWith(el);
 
@@ -436,7 +440,6 @@
             // find parent list of item under cursor
             var pointElRoot = this.pointEl.closest('.' + opt.rootClass),
                 isNewRoot   = this.dragRootEl.data('nestable-id') !== pointElRoot.data('nestable-id');
-            console.log(this.isStable);
             if(this.isStable && pointElRoot.hasClass('dd-plan')) {
                 return;
             }

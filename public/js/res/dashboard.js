@@ -92,13 +92,15 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', function
     };
 
 
-    $scope.itemClick = function(e) {
-        //console.log('this key down');
+    $scope.itemClick = function(e, mission) {
+        console.log('this key down');
+        console.log(mission);
     };
 
-    $scope.itemClick2 = function(e) {
+    $scope.itemClick2 = function(e, mission) {
         //console.log(e.target.parentNode.parentNode);
-        //console.log('this key down 2');
+        console.log('this key down 2');
+        console.log(mission);
     };
 }]);
 
