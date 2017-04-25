@@ -119,8 +119,8 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', '$rootSc
                         controller: 'MissionCommitModalCtrl',
                         size: 'lg',
                         resolve: {
-                            missionInfo: function () {
-                                return $scope.targetMission;
+                            missionUid: function () {
+                                return $scope.targetMission.uid;
                             }
                         }
                     });
@@ -316,26 +316,36 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'missionInfo
     };
 }]);
 
-app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionInfo', '$http', function($scope, $modalInstance, missionInfo, $http) {
+app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionUid', '$http', function($scope, $modalInstance, missionUid, $http) {
     console.log('mission modal loaded');
     $scope.missionCtrl = $scope;
     $scope.missionCtrl.dayVals = ['周日','周一','周二','周三','周四','周五','周六'];
     $scope.missionCtrl.initUid = '';
     $scope.missionCtrl.facility = "";
-    $scope.missionCtrl.missionInfo = missionInfo;
     $scope.missionCtrl.env = {};
+    $scope.missionCtrl.missionInfo = {};
 
+    console.log(missionUid);
     $http({
         method: 'POST',
-        url: '/mission/createMission',
-        data: {category: "SINGLE"}
-    }).then(function success(res){
-        $scope.missionCtrl.singleIndex = res.data.index;
-        $scope.missionCtrl.singleUid = 'MS-S-' + res.data.index;
-        $scope.missionCtrl.missionInfo.uid = $scope.missionCtrl.singleUid;
+        url: '/mission/findMission',
+        date: {
+            category: 'SINGLE',
+            uid: missionUid
+        }
+    }).then(function success(res) {
+        console.log(res);
     });
+    // $http({
+    //     method: 'POST',
+    //     url: '/mission/createMission',
+    //     data: {category: "SINGLE"}
+    // }).then(function success(res){
+    //     $scope.missionCtrl.singleIndex = res.data.index;
+    //     $scope.missionCtrl.singleUid = 'MS-S-' + res.data.index;
+    //     $scope.missionCtrl.missionInfo.uid = $scope.missionCtrl.singleUid;
+    // });
 
-    $scope.missionCtrl.env = {};
     $http({
         method: 'POST',
         url: '/mission/getAllManager',
