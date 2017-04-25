@@ -330,11 +330,11 @@ app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionUi
         method: 'POST',
         url: '/mission/findMission',
         date: {
-            category: 'SINGLE',
+            category: 'ROLL',
             uid: missionUid
         }
     }).then(function success(res) {
-        console.log(res);
+        console.log(res.data.mission);
     });
     // $http({
     //     method: 'POST',

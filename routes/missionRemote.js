@@ -50,6 +50,35 @@ router.post('/getAllFacility', function(req, res, next) {
     });
 });
 
+router.post('/findMission', function(req, res, next) {
+    console.log(req.body);
+    if(req.body.category === 'ROLL') {
+        RollMission.find({uid: req.body.uid}, function(err, doc) {
+            if(err) {
+                res.send({code: 300});
+                return console.error(err);
+            } else if(!doc.length) {
+                res.send({code: 301});
+            } else {
+                res.send({code: 200, mission: doc[0]});
+            }
+        });
+    } else if(req.body.category === 'SINGLE') {
+        SingleMission.find({uid: req.body.uid}, function(err, doc) {
+            if(err) {
+                res.send({code: 300});
+                return console.error(err);
+            } else if(!doc.length) {
+                res.send({code: 301});
+            } else {
+                res.send({code: 200, mission: doc[0]});
+            }
+        });
+    } else {
+        res.send({code: 301});
+    }
+});
+
 router.post('/createMission', function(req, res, next) {
     // var mission = new RollMission({uid: 1000});
     // mission.save();
