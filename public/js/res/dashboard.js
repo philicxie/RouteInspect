@@ -323,20 +323,8 @@ app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionIn
     $scope.missionCtrl.initUid = '';
     $scope.missionCtrl.facility = "";
     $scope.missionCtrl.missionInfo = missionInfo;
-    $scope.missionCtrl.category = 'SINGLE';
-    $scope.missionCtrl.missionLoop = {};
-    $scope.missionCtrl.missionLoop.month = {};
-    $scope.missionCtrl.missionLoop.month.days = [];
-    $scope.missionCtrl.missionLoop.days = [];
-    for(var i=0;i<7;i++) {
-        $scope.missionCtrl.missionLoop.days.push({
-            chosen: false,
-            value: $scope.missionCtrl.dayVals[i]
-        });
-    }
-    for(var i=0;i<31;i++) {
-        $scope.missionCtrl.missionLoop.month.days.push(i+1);
-    }
+    $scope.missionCtrl.env = {};
+
     $http({
         method: 'POST',
         url: '/mission/createMission',

@@ -16,13 +16,11 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">目标设备</label>
                     <div class="col-sm-9">
-                        <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.missionInfo.facility">
-                            <option value="{{facility.uid}}" ng-repeat="facility in missionCtrl.env.facilities">{{facility.uid}} {{facility.name}}</option>
-                        </select>
+                        <p class="form-control-static" >{{missionCtrl.missionInfo.facility}}</p>
                     </div>
                 </div>
-                <div class="line line-dashed b-a line-lg pull-none" ng-if="missionCtrl.category=='SINGLE'"></div>
-                <div class="form-group" ng-if="missionCtrl.category=='SINGLE'">
+                <div class="line line-dashed b-a line-lg pull-none"></div>
+                <div class="form-group">
                     <label class="col-sm-3 control-label">负责人</label>
                     <div class="col-sm-9">
                         <select ui-jq="chosen" class="w-full" ng-model="missionCtrl.missionInfo.manager">
@@ -30,7 +28,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group" ng-if="missionCtrl.category=='SINGLE'">
+                <div class="form-group">
                     <label class="col-sm-3 control-label">执行人</label>
                     <div class="col-sm-9">
                         <select ui-jq="chosen" multiple class="w-full" ng-model="missionCtrl.missionInfo.worker">
@@ -39,26 +37,10 @@
                     </div>
                 </div>
                 <div class="line line-dashed b-a line-lg pull-none"></div>
-                <div class="form-group" ng-if="missionCtrl.category=='SINGLE'">
+                <div class="form-group">
                     <label class="col-sm-3 control-label">日期</label>
                     <div class="col-sm-9">
-                        <p class="input-group">
-                            <input type="text"
-                                   class="form-control"
-                                   datepicker-popup="{{missionCtrl.format}}"
-                                   ng-model="missionCtrl.missionInfo.date"
-                                   is-open="missionCtrl.opened"
-                                   min-date="missionCtrl.minDate"
-                                   max-date="missionCtrl.maxDate"
-                                   datepicker-options="{{missionCtrl.dateOptions}}"
-                                   ng-required="true"
-                            />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open($event)">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </button>
-                            </span>
-                        </p>
+                        <p class="form-control-static">{{missionCtrl.missionInfo.date}}</p>
                     </div>
                 </div>
                 <div class="line line-dashed b-a line-lg pull-none"></div>
