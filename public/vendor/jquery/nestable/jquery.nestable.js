@@ -304,10 +304,13 @@
 
             // fix for zepto.js
             //this.placeEl.replaceWith(this.dragEl.children(this.options.itemNodeName + ':first').detach());
+
             var el = this.dragEl.children(this.options.itemNodeName).first();
-            (el[0].click)();
             el[0].parentNode.removeChild(el[0]);
+
             this.placeEl.replaceWith(el);
+            (el[0].click)();
+            //(this.placeEl[0].click)();
 
             this.dragEl.remove();
             this.el.trigger('change');
@@ -430,7 +433,7 @@
                 this.pointEl = this.pointEl.parent(opt.itemNodeName);
             }
             if (this.pointEl.hasClass(opt.emptyClass)) {
-                console.log('empty');
+                //console.log('empty');
                 isEmpty = true;
             }
             else if (!this.pointEl.length || !this.pointEl.hasClass(opt.itemClass)) {
