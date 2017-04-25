@@ -335,7 +335,14 @@ app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionUi
         }
     }).then(function success(res) {
         console.log(res.data.mission);
-    });
+    }).then($http({
+        method: 'POST',
+        url: '/mission/createMission',
+        data: {category: 'SINGLE'}
+    }).then(function success(res) {
+        $scope.missionCtrl.index = res.data.index;
+        $scope.missionCtrl.missionInfo.uid = 'MS-S-' + res.data.index;
+    }));
     // $http({
     //     method: 'POST',
     //     url: '/mission/createMission',
