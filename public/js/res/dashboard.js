@@ -111,7 +111,7 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', '$rootSc
             }
             if($scope.endColumn !== $scope.startColumn) {
                 $scope.targetMission = mission;
-                console.log(mission);
+                //console.log(mission);
                 if($scope.targetMission.category === "ROLL") {
                     console.log('show modal');
                     var commitMissionModalInstance = $modal.open({
@@ -317,24 +317,65 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'missionInfo
 }]);
 
 app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionUid', '$http', function($scope, $modalInstance, missionUid, $http) {
-    console.log('mission modal loaded');
+    var tt = new Date();
+    tt.setDate(tt.getDate()+20);
+    console.log(tt);
     $scope.missionCtrl = $scope;
     $scope.missionCtrl.dayVals = ['周日','周一','周二','周三','周四','周五','周六'];
     $scope.missionCtrl.initUid = '';
     $scope.missionCtrl.facility = "";
     $scope.missionCtrl.env = {};
     $scope.missionCtrl.missionInfo = {};
-
     console.log(missionUid);
     $http({
         method: 'POST',
         url: '/mission/findMission',
-        date: {
+        data: {
             category: 'ROLL',
             uid: missionUid
         }
     }).then(function success(res) {
-        console.log(res.data.mission);
+        $scope.missionCtrl.missionInfo = res.data.mission;
+        console.log($scope.missionCtrl.missionInfo);
+        $scope.missionCtrl.missionInfo.facilityInfo = $scope.missionCtrl.missionInfo.facility.join(', ');
+        //process roll info and generate the next active-date
+        var temDate = new Date();
+        switch($scope.missionCtrl.missionInfo.category) {
+            case 'DAY':
+                break;
+            case 'WEEK':
+                var i = 0;
+                for(i=0;i<$scope.missionCtrl.missionInfo.dates.length; i++) {
+                    if(temDate.getDay() <= $scope.missionCtrl.missionInfo.dates[i]) {
+                        console.log(i + ' ' +temDate.getDay());
+                        break;
+                    }
+                }
+                if(i===$scope.missionCtrl.missionInfo.dates.length) {
+                    temDate.setDate(temDate.getDate() + $scope.missionCtrl.missionInfo.dates[0] - temDate.getDay() + 7);
+                } else {
+                    temDate.setDate(temDate.getDate() + $scope.missionCtrl.missionInfo.dates[i] - temDate.getDay());
+                }
+                console.log(temDate);
+                break;
+            case 'MONTH':
+                var i = 0;
+                for(i=0;i<$scope.missionCtrl.missionInfo.dates.length; i++) {
+                    if(temDate.getDay() <= $scope.missionCtrl.missionInfo.dates[i]) {
+                        break;
+                    }
+                }
+                if(i===$scope.missionCtrl.missionInfo.dates.length) {
+                    temDate.setDate(temDate.getDate() + $scope.missionCtrl.missionInfo.dates[0] - temDate.getDay() + 7);
+                } else {
+                    temDate.setDate(temDate.getDate() + $scope.missionCtrl.missionInfo.dates[i] - temDate.getDay());
+                }
+                break;
+            default:
+                break;
+        }
+        $scope.missionCtrl.missionInfo.date = temDate;
+        $scope.missionCtrl.missionInfo.dateInfo = temDate.getFullYear()+'年'+(temDate.getMonth()+1)+'月'+temDate.getDate()+ '日, ' +$scope.missionCtrl.dayVals[temDate.getDay()];
     }).then($http({
         method: 'POST',
         url: '/mission/createMission',
@@ -404,43 +445,12 @@ app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionUi
         $modalInstance.dismiss('cancel');
     };
 
-    $scope.today = function() {
-        $scope.missionCtrl.missionInfo.date = new Date();
-    };
-    $scope.today();
-
-    $scope.clear = function () {
-        $scope.missionCtrl.missionInfo.date = null;
-    };
-
     // Disable weekend selection
-    $scope.disabled = function(date, mode) {
-        return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-    };
 
-    $scope.toggleMin = function() {
-        $scope.missionCtrl.minDate = $scope.missionCtrl.minDate ? null : new Date();
-        $scope.missionCtrl.maxDate = $scope.missionCtrl.maxDate ? null : new Date();
-        $scope.missionCtrl.maxDate.setFullYear($scope.missionCtrl.maxDate.getFullYear()*1+1);
-    };
-    $scope.toggleMin();
 
     $scope.open = function($event) {
         $event.stopPropagation();
         $scope.missionCtrl.opened = true;
     };
 
-    $scope.changeCateToSingle = function() {
-        if($scope.missionCtrl.missionInfo) {
-            $scope.missionCtrl.missionInfo.index = $scope.missionCtrl.singleIndex;
-            $scope.missionCtrl.missionInfo.uid = $scope.missionCtrl.singleUid;
-        }
-    };
-
-    $scope.changeCateToRoll = function() {
-        if($scope.missionCtrl.missionInfo) {
-            $scope.missionCtrl.missionInfo.index = $scope.missionCtrl.rollIndex;
-            $scope.missionCtrl.missionInfo.uid = $scope.missionCtrl.rollUid;
-        }
-    };
 }]);

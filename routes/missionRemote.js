@@ -53,11 +53,12 @@ router.post('/getAllFacility', function(req, res, next) {
 router.post('/findMission', function(req, res, next) {
     console.log(req.body);
     if(req.body.category === 'ROLL') {
+        console.log('get here');
         RollMission.find({uid: req.body.uid}, function(err, doc) {
             if(err) {
                 res.send({code: 300});
                 return console.error(err);
-            } else if(!doc.length) {
+            } else if(doc.length === 0) {
                 res.send({code: 301});
             } else {
                 res.send({code: 200, mission: doc[0]});
