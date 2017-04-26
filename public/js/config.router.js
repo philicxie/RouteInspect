@@ -67,6 +67,16 @@ angular.module('app')
                           }]
                   }
               })
+              .state('app._chart', {
+                  url: '/chart',
+                  templateUrl: 'pages/_chart.html',
+                  resolve: {
+                      deps: ['uiLoad',
+                          function( uiLoad ){
+                              return uiLoad.load( ['js/res/chart.js']);
+                          }]
+                  }
+              })
               .state('access', {
                   url: '/access',
                   template: '<div ui-view class="fade-in-right-big smooth"></div>'
