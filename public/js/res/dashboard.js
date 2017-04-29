@@ -366,7 +366,7 @@ app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionUi
                     }
                 }
                 if(i===$scope.missionCtrl.missionInfo.dates.length) {
-                    temDate.setDate(temDate.getDate() + $scope.missionCtrl.missionInfo.dates[0] - temDate.getDay() + 7);
+                    temDate.setDate(temDate.getDate() + $scope.missionCtrl.missionInfo.dates[0] - temDate.getDay() + 30);
                 } else {
                     temDate.setDate(temDate.getDate() + $scope.missionCtrl.missionInfo.dates[i] - temDate.getDay());
                 }

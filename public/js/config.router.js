@@ -193,8 +193,8 @@ angular.module('app')
                       }]
                   }
               })
-              .state('app.chart', {
-                  url: '/chart',
+              .state('app.ui.charts', {
+                  url: '/charts',
                   templateUrl: 'tpl/ui_chart.html',
                   resolve: {
                       deps: ['uiLoad',
