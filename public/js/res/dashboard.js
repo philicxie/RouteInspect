@@ -317,9 +317,7 @@ app.controller('MissionInfoModalCtrl', ['$scope', '$modalInstance', 'missionInfo
 }]);
 
 app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionUid', '$http', function($scope, $modalInstance, missionUid, $http) {
-    var tt = new Date();
-    tt.setDate(tt.getDate()+20);
-    console.log(tt);
+
     $scope.missionCtrl = $scope;
     $scope.missionCtrl.dayVals = ['周日','周一','周二','周三','周四','周五','周六'];
     $scope.missionCtrl.initUid = '';
@@ -443,14 +441,6 @@ app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionUi
     $scope.cancel = function() {
         console.log('modal cancel clicked');
         $modalInstance.dismiss('cancel');
-    };
-
-    // Disable weekend selection
-
-
-    $scope.open = function($event) {
-        $event.stopPropagation();
-        $scope.missionCtrl.opened = true;
     };
 
 }]);
