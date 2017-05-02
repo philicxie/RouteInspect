@@ -94,12 +94,7 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', '$rootSc
 
 
     $scope.missionUp = function(e, mission) {
-        // var temNode = e.target;
-        // while(temNode.classList[0] !== 'dd') {
-        //     temNode = temNode.parentNode;
-        // }
-        // console.log(temNode.classList);
-        //console.log(e.target);
+
         if(mission.uid === $scope.targetMission.uid) {
             for(var temNode = e.target;temNode;temNode = temNode.parentNode) {
                 if(!temNode.parentNode || !temNode.classList)
@@ -126,25 +121,11 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', '$rootSc
                     });
                     commitMissionModalInstance.result.then(function (resMission) {
                         console.log(resMission);
-                        var reqMission = {};
-                        reqMission.category = resMission.category;
-                        reqMission.mission = {
-                            index: resMission.mission.index,
-                            uid: resMission.mission.uid,
-                            facility: resMission.mission.facility,
-                            abstract: resMission.mission.abstract
-                        };
-                        if(resMission.category === 'SINGLE') {
 
-                        } else {
-                            reqMission.mission.category = resMission.mission.category;
-                            reqMission.mission.dates = resMission.mission.dates;
-                        }
-                        console.log(reqMission);
                         $http({
                             method: 'POST',
                             url: '/mission/commitMission',
-                            data: reqMission
+                            data: resMission
                         }).then(function success(res) {
                             console.log(res);
                             //$state.reload();
@@ -379,7 +360,7 @@ app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionUi
         url: '/mission/createMission',
         data: {category: 'SINGLE'}
     }).then(function success(res) {
-        $scope.missionCtrl.index = res.data.index;
+        $scope.missionCtrl.missionInfo.index = res.data.index;
         $scope.missionCtrl.missionInfo.uid = 'MS-S-' + res.data.index;
     }));
     // $http({
@@ -409,32 +390,38 @@ app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionUi
 
     $scope.ok = function() {
         console.log('mission info modal closed');
-        console.log($scope.missionCtrl.missionInfo);
-        console.log($scope.missionCtrl.missionLoop);
-        if($scope.missionCtrl.category === 'ROLL') {
-            var dates = [];
-            switch($scope.missionCtrl.missionLoop.type) {
-                case 'DAY':
-                    break;
-                case 'WEEK':
-                    for(var i=0;i<7;i++) {
-                        if($scope.missionCtrl.missionLoop.days[i].chosen) {
-                            dates.push(i);
-                        }
-                    }
-                    break;
-                case 'MONTH':
-                    dates = $scope.missionCtrl.missionLoop.month.val;
-                    break;
-                default:
-                    break;
-            }
-            $scope.missionCtrl.missionInfo.dates = dates;
-            $scope.missionCtrl.missionInfo.category = $scope.missionCtrl.missionLoop.type;
-        }
+        //console.log($scope.missionCtrl.missionInfo);
+        // if($scope.missionCtrl.category === 'ROLL') {
+        //     var dates = [];
+        //     switch($scope.missionCtrl.missionLoop.type) {
+        //         case 'DAY':
+        //             break;
+        //         case 'WEEK':
+        //             for(var i=0;i<7;i++) {
+        //                 if($scope.missionCtrl.missionLoop.days[i].chosen) {
+        //                     dates.push(i);
+        //                 }
+        //             }
+        //             break;
+        //         case 'MONTH':
+        //             dates = $scope.missionCtrl.missionLoop.month.val;
+        //             break;
+        //         default:
+        //             break;
+        //     }
+        //     $scope.missionCtrl.missionInfo.dates = dates;
+        //     $scope.missionCtrl.missionInfo.category = $scope.missionCtrl.missionLoop.type;
+        // }
         $modalInstance.close({
-            mission: $scope.missionCtrl.missionInfo,
-            category: $scope.missionCtrl.category
+            mission: {
+                index: $scope.missionCtrl.missionInfo.index,
+                uid: $scope.missionCtrl.missionInfo.uid,
+                abstract: $scope.missionCtrl.missionInfo.abstract,
+                status: 'PROCESSING',
+                facility: $scope.missionCtrl.missionInfo.facility,
+                manager: $scope.missionCtrl.missionInfo.manager,
+                worker: $scope.missionCtrl.missionInfo.worker
+            }
         });
     };
 
@@ -442,5 +429,4 @@ app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionUi
         console.log('modal cancel clicked');
         $modalInstance.dismiss('cancel');
     };
-
 }]);
