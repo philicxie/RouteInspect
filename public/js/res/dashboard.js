@@ -73,7 +73,10 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', '$rootSc
                 abstract: resMission.mission.abstract
             };
             if(resMission.category === 'SINGLE') {
-
+                reqMission.mission.date = resMission.mission.date;
+                reqMission.mission.worker =resMission.mission.worker;
+                reqMission.mission.manager = resMission.mission.manager;
+                reqMission.mission.status = 'PLANNING';
             } else {
                 reqMission.mission.category = resMission.mission.category;
                 reqMission.mission.dates = resMission.mission.dates;
