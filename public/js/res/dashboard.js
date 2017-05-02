@@ -88,7 +88,7 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', '$rootSc
                 data: reqMission
             }).then(function success(res) {
                 console.log(res);
-                //$state.reload();
+                $state.reload();
             });
         }, function(){
             console.log('dismissed');
