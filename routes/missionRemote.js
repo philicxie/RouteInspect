@@ -186,7 +186,7 @@ router.post('/getAllMissionIntros', function(req, res, next) {
                         resArr.push({
                             status: mission.status,
                             uid: mission.uid,
-                            date: mission.date,
+                            date: mission.date.getFullYear()+'年'+(mission.date.getMonth()+1)+'月'+mission.date.getDate()+ '日',
                             category: 'SINGLE',
                             facility: mission.facility.join(", "),
                             manager: mission.manager

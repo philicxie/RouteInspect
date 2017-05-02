@@ -70,9 +70,23 @@
                             当前任务
                         </div>
                         <div ui-jq="nestable" class="dd dd-process" id="Processing">
-
-
-                            <div class="dd-empty"></div>
+                            <li class="dd-item dd-stable" data-id="1" ng-mousedown="missionDown($event, mission)" ng-click="missionUp($event, mission)" ng-repeat="mission in processingMission">
+                                <div class="dd-handle">
+                                    <div class="row">
+                                        <div class="col-lg-3 text-center">
+                                            <i class="fa fa-history fa-5x dd-title" style="margin-top:40px; margin-left:10px;" title="循环任务" ng-if="mission.category == 'ROLL'"></i>
+                                            <i class="fa fa-history fa-5x dd-title" style="margin-top:40px; margin-left:10px;" title="单次任务" ng-show="mission.category == 'SINGLE'"></i>
+                                        </div>
+                                        <div class="col-lg-9 wrapper-sm">
+                                            <div class="dd-title text-3x"><i class="glyphicon glyphicon-edit text-lg"></i> {{mission.uid}}</div>
+                                            <div class="line line-lg pull-none" style="width: 80%;"></div>
+                                            <div class="text-md dd-title"><i class="glyphicon glyphicon-map-marker"></i> &nbsp&nbsp{{mission.info}}</div>
+                                            <div class="line line-lg pull-none " style="width: 80%;"></div>
+                                            <div class="text-md dd-title"><i class="fa fa-calendar"></i> &nbsp&nbsp{{mission.date}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
 
                         </div>
                     </div>

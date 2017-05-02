@@ -125,10 +125,13 @@ app.controller('DashboardCtrl', ['$http', '$scope', '$modal', '$state', '$rootSc
                         $http({
                             method: 'POST',
                             url: '/mission/commitMission',
-                            data: resMission
+                            data: {
+                                category: 'SINGLE',
+                                mission: resMission.mission
+                            }
                         }).then(function success(res) {
                             console.log(res);
-                            //$state.reload();
+                            $state.reload();
                         });
                     }, function(){
                         console.log('dismissed');
@@ -390,33 +393,12 @@ app.controller('MissionCommitModalCtrl', ['$scope', '$modalInstance', 'missionUi
 
     $scope.ok = function() {
         console.log('mission info modal closed');
-        //console.log($scope.missionCtrl.missionInfo);
-        // if($scope.missionCtrl.category === 'ROLL') {
-        //     var dates = [];
-        //     switch($scope.missionCtrl.missionLoop.type) {
-        //         case 'DAY':
-        //             break;
-        //         case 'WEEK':
-        //             for(var i=0;i<7;i++) {
-        //                 if($scope.missionCtrl.missionLoop.days[i].chosen) {
-        //                     dates.push(i);
-        //                 }
-        //             }
-        //             break;
-        //         case 'MONTH':
-        //             dates = $scope.missionCtrl.missionLoop.month.val;
-        //             break;
-        //         default:
-        //             break;
-        //     }
-        //     $scope.missionCtrl.missionInfo.dates = dates;
-        //     $scope.missionCtrl.missionInfo.category = $scope.missionCtrl.missionLoop.type;
-        // }
         $modalInstance.close({
             mission: {
                 index: $scope.missionCtrl.missionInfo.index,
                 uid: $scope.missionCtrl.missionInfo.uid,
                 abstract: $scope.missionCtrl.missionInfo.abstract,
+                date: $scope.missionCtrl.missionInfo.date,
                 status: 'PROCESSING',
                 facility: $scope.missionCtrl.missionInfo.facility,
                 manager: $scope.missionCtrl.missionInfo.manager,
