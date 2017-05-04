@@ -1,7 +1,7 @@
 /**
  * Created by philic on 2017/3/20.
  */
-app.controller('ContactCtrl', ['$scope', '$http', '$filter', '$modal', function($scope, $http, $filter, $modal) {
+app.controller('FacilityCtrl', ['$scope', '$http', '$filter', '$modal', function($scope, $http, $filter, $modal) {
     // $http.get('js/app/contact/contacts.json').then(function (resp) {
     //     $scope.items = resp.data.items;
     //     $scope.item = $filter('orderBy')($scope.items, 'first')[0];
@@ -21,6 +21,7 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', '$modal', function(
         res.data.map(function(item){
             $scope.groups.push({name: item});
         });
+        $scope.groups[0].selected = true;
         $http({
             method: 'POST',
             url: '/facility/getAllFacility',
@@ -60,7 +61,6 @@ app.controller('ContactCtrl', ['$scope', '$http', '$filter', '$modal', function(
         $scope.group.selected = true;
         $scope.filters = item.name;
         $scope.hstep = item.name;
-        console.log($scope.hstep);
     };
 
     $scope.selectItem = function(item){

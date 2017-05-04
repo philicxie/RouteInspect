@@ -5,8 +5,7 @@
   app.settings.container = false;
   app.hideAside = false;
   app.hideFooter = false;
-  " ng-controller="ContactCtrl">
-
+  " ng-controller="FacilityCtrl">
     <!-- column -->
     <div class="col w b-r">
         <div class="vbox">
@@ -15,8 +14,8 @@
                     <div class="cell-inner">
                         <div class="list-group no-radius no-border no-bg m-b-none">
                             <a class="list-group-item b-b" ng-class="{'focus': (filter == '')}" ng-click="selectGroup({name:''})">所有设备</a>
+
                             <a ng-repeat="item in groups" ng-dblclick="editItem(item)" class="list-group-item m-l hover-anchor b-a no-select" ng-class="{'focus m-l-none': item.selected}" ng-click="selectGroup(item)">
-                                <span ng-click='deleteGroup(item)' class="pull-right text-muted hover-action"><i class="fa fa-times"></i></span>
                                 <span class="block m-l-n" ng-class="{'m-n': item.selected }">{{ item.name ? item.name : 'Untitled' }}</span>
                                 <input type="text" class="form-control pos-abt" ng-show="item.editing" ng-blur="doneEditing(item)" ng-model="item.name" style="top:3px;left:2px;width:98%" ui-focus="item.editing">
                             </a>
@@ -24,6 +23,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <!-- /column -->
@@ -67,13 +67,13 @@
     <!-- column -->
     <div class="col bg-white-only">
         <div class="vbox">
-            <div class="wrapper b-b">
-                <div class="m-t-n-xxs m-b-n-xxs m-l-xs">
-                    <a class="btn btn-xs btn-default pull-right" ng-hide="!item" ng-click="deleteItem(item)"><i class="fa fa-times"></i></a>
-                    <a class="btn btn-xs btn-default" ng-hide="item.editing" ng-click="editItem(item)">Edit</a>
-                    <a class="btn btn-xs btn-default" ng-show="item.editing" ng-click="doneEditing(item)">Done</a>
-                </div>
-            </div>
+            <!--<div class="wrapper b-b">-->
+                <!--<div class="m-t-n-xxs m-b-n-xxs m-l-xs">-->
+                    <!--<a class="btn btn-xs btn-default pull-right" ng-hide="!item" ng-click="deleteItem(item)"><i class="fa fa-times"></i></a>-->
+                    <!--<a class="btn btn-xs btn-default" ng-hide="item.editing" ng-click="editItem(item)">Edit</a>-->
+                    <!--<a class="btn btn-xs btn-default" ng-show="item.editing" ng-click="doneEditing(item)">Done</a>-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="row-row">
                 <div class="wrapper" ng-controller="BMapCtrl">
                     <div class="form-group" id="allmap" ng-style="mapStyle"></div>
